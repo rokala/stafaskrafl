@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from '../styles/Input.module.scss'
 
 export default class Input extends React.Component {
   constructor(props) {
@@ -6,10 +7,8 @@ export default class Input extends React.Component {
   }
   render() {
     return (
-      <div>
-        <h2>
+      <div className={styles.input}>
           {this.props.value}
-        </h2>
       </div>
     );
   }

@@ -1,25 +1,39 @@
 import React from 'react';
+import { gameConfig } from '../core/gameConfig';
+import { numUniqueChars } from '../utils/numUniqueChars'; 
 
 export default class Hive extends React.Component {
   constructor(props) {
     super(props);
   }
 
+  calcScore() {
+    return this.props.words.reduce((prev, curr) => prev + numUniqueChars(curr) * curr.length, 0);
+  }
+
+  calcScore2() {
+    return this.props.words.reduce((prev, curr) => prev + 2 * numUniqueChars(curr) + curr.length, 0);
+  }
+
   render() {
     return (
       <div>
-        <label htmlFor="sort-alphabetically">
+        {
+          this.props.words.length > 0 &&
+          (        <label htmlFor="sort-alphabetically">
           <input
             type="checkbox"
             id="sort-alphabetically"
             name="sort-alphabetically"
-            //value={this.state.alphabetic}
             defaultChecked={false}
-            //checked={false}
             onChange={this.props.handleChange}
           />
-          Sort alphabetically
-        </label>
+            Sort alphabetically
+          </label>
+          )
+        }
+
+        <h4> Score 1: {this.calcScore()} / Score 2: {this.calcScore2()}</h4>
         <h4>
           {
             this.props.words.length > 0
@@ -27,13 +41,14 @@ export default class Hive extends React.Component {
             : <>Words you find will appear here</>
           }
         </h4>
-        <ul>
+        <ol>
           {
             this.props.words.map(word => {
-              return <li key={word}>{word}</li>
+              const usesAllLetters = numUniqueChars(word) === gameConfig.numLetterOptions
+              return <li key={word} allLetters={usesAllLetters}>{word}</li>
             })
           }
-        </ul>
+        </ol>
       </div>
     );
   }

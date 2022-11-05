@@ -1,7 +1,8 @@
 import React from 'react';
 import { Stage, Layer, Text, RegularPolygon, Group } from 'react-konva';
-import { gameConfig } from '../core/gameConfig';
 import Input from './Input';
+import styles from '../styles/Hive.module.scss'
+import { gameConfig } from '../core/gameConfig';
 import shuffle from '../utils/shuffle';
 import hasProp from '../utils/hasProp';
 
@@ -64,7 +65,8 @@ export default class Hive extends React.Component {
 
   componentDidMount() {
     window.addEventListener('keydown', (e) => {
-      switch(e.key.toUpperCase()) {
+      const char = e.key.toUpperCase();
+      switch(char) {
         case 'ENTER':
           this.onSubmitInput();
           break;
@@ -72,8 +74,32 @@ export default class Hive extends React.Component {
           this.onRemoveLastInput();
           break;
         default:
-          this.onAddLetter(e.key.toUpperCase());
+          this.onAddLetter(char);
+          if (hasProp.call(this.wrappers, char)) {
+            const targets = this.wrappers[char].groupRef.children;
+            targets.forEach(child => {
+              child.to({
+                scaleX: 0.95,
+                scaleY: 0.95,
+                duration: 0.08
+              });
+            });
+          }
           break;
+      }
+    });
+
+    window.addEventListener('keyup', (e) => {
+      const char = e.key.toUpperCase();
+      if (hasProp.call(this.wrappers, char)) {
+        const targets = this.wrappers[char].groupRef.children;
+        targets.forEach(child => {
+          child.to({
+            scaleX: 1.0,
+            scaleY: 1.0,
+            duration: 0.08
+          });
+        });
       }
     });
   }
@@ -97,6 +123,8 @@ export default class Hive extends React.Component {
       console.log(`Letter "${letter} is not eligible."`);
       return;
     }
+    //this.onCellClickOn(e.target);
+    //this.onCellClickOff(e.target);
     if (this.state.input.length > gameConfig.maxWordLength) {
       console.log('This word is too long!');
       this.onClearInput();
@@ -128,17 +156,9 @@ export default class Hive extends React.Component {
     }
   }
 
-  cellScale(letter, value) {
-    this.wrappers[letter].polygonRef.to({
-      scaleX: value,
-      scaleY: value,
-      duration: 0.08
-    });
-  }
-
   shuffleAnimation = (e) => {
     const numUnits = 4;
-    const unitDuration = 0.12;
+    const unitDuration = 0.1;
     const totalDuration = unitDuration * numUnits;
     const unitRotation = 60;
     const rotation = unitRotation * numUnits;
@@ -172,6 +192,43 @@ export default class Hive extends React.Component {
     })
   };
 
+  onCellHoverOn(target) {
+    const polygon = target.getParent().children
+      .find(child => child.className === 'RegularPolygon');
+    polygon.setAttrs({fill: '#121212'});
+    const container = polygon.getStage().container();
+    container.style.cursor = 'pointer';
+  }
+
+  onCellHoverOff(target) {
+    const polygon = target.getParent().children
+      .find(child => child.className === 'RegularPolygon');
+    polygon.setAttrs({fill: '#2c2c2c'});
+    this.onCellClickOff(polygon);
+    const container = polygon.getStage().container();
+    container.style.cursor = 'default';
+  }
+
+  onCellClickOn(target) {
+    target.getParent().children.forEach(child => {
+      child.to({
+        scaleX: 0.95,
+        scaleY: 0.95,
+        duration: 0.08
+      });
+    });
+  }
+
+  onCellClickOff(target) {
+    target.getParent().children.forEach(child => {
+      child.to({
+        scaleX: 1.0,
+        scaleY: 1.0,
+        duration: 0.08
+      });
+    });
+  }
+  
   render() {
     this.updateWrapper();
     return (
@@ -193,18 +250,12 @@ export default class Hive extends React.Component {
                 ref={(node) => {
                   wrapper.groupRef = node;
                 }}
-                onMouseEnter={e => {
-                  const container = e.target.getStage().container();
-                  container.style.cursor = 'pointer';
-                  this.cellScale(letter, 1.08);
-                }}
-                onMouseLeave={e => {
-                  const container = e.target.getStage().container();
-                  container.style.cursor = 'default';
-                  this.cellScale(letter, 1);
-                }}
+                onMouseEnter={e => this.onCellHoverOn(e.target)}
+                onMouseLeave={e => this.onCellHoverOff(e.target)}
+                onPointerDown={e => this.onCellClickOn(e.target)}
+                onPointerUp={e => this.onCellClickOff(e.target)}
                 onClick={e => this.onAddLetter(letter)}
-                
+                onTap={e => this.onAddLetter(letter)}
               >
                 <RegularPolygon
                   ref={(node) => {
@@ -238,14 +289,14 @@ export default class Hive extends React.Component {
           })}
         </Layer>
       </Stage>
-      <div>
-        <button type="button" onClick={() => this.onRemoveLastInput()} disabled={this.state.formLocked}>
+      <div className={styles.actions}>
+        <button type="button" onClick={() => this.onRemoveLastInput()} disabled={this.state.input.length === 0}>
           Delete
         </button>
         <button type="button" onClick={() => this.onShuffle()} disabled={this.state.formLocked}>
           Shuffle
         </button>
-        <button type="button" onClick={() => this.onSubmitInput()} disabled={this.state.formLocked}>
+        <button type="button" onClick={() => this.onSubmitInput()} disabled={this.state.input.length === 0}>
           Enter
         </button>
       </div>
