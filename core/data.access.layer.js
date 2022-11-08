@@ -1,5 +1,6 @@
 import Database from 'better-sqlite3';
 import { today } from '../utils/dates';
+import NodeCache from 'node-cache';
 
 class DataAccessLayer {
   constructor() {
@@ -13,23 +14,28 @@ class DataAccessLayer {
     this.instance.function('regexp', function(characters, input) {
       return new RegExp(`^[${characters}]+$`, 'i').test(input) ? 1 : 0;
     });
+    this.cache = new NodeCache({ stdTTL: 259200, checkperiod: 86400, useClones: false });
   }
 
   getCurrent() {
-    const activeState = this.getGameState(today());
+    const dateToday = today().getTime();
+    const cacheResponse = this.cache.get(dateToday);
+    if (cacheResponse) {
+      return cacheResponse;
+    }
+    const activeState = this.getGameState(dateToday);
     if (!activeState) {
       return activeState;
     }
     const answers = this.getStateAnswers(activeState.letters);
-    // TODO: Remove unneeded properties after debugging.
-    //const response = { ...activeState, hashes: answers.map(el => el.hash), words: answers.map(el => el.value), ...answers };
-    const response = { ...activeState, hashes: answers.map(el => el.hash) };
+    const response = { ...activeState, hashes: answers.map(el => el.hash)/*, words: answers.map(el => el.value) */};
+    this.cache.set(dateToday, response);
     return response;
   }
 
   getGameState(date) {
     const state = this.instance
-      .prepare(`SELECT date, value letters FROM game_states WHERE date=${date.getTime()}`)
+      .prepare(`SELECT date, value letters FROM game_states WHERE date=${date}`)
       .get();
 
     if (!state) {

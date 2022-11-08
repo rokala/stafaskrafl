@@ -8,5 +8,6 @@ export default function handler(req, res) {
     // TODO: Create needed state on demand.
     res.status(400).json({ message: `No game state found for current date.` })
   }
+  res.setHeader('Cache-Control', 's-maxage=3600, immutable');
   res.status(200).json(current);
 }
