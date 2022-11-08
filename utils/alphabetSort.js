@@ -1,14 +1,10 @@
 const alphabetIndex = {};
-
 'AÁBDÐEÉFGHIÍJKLMNOÓPRSTUÚVXYÝÞÆÖ'.split('').forEach((char, idx) => alphabetIndex[char] = idx+1);
 
 export const compareIcelandic = function (a, b) {
   // same word? exit early
   const al = a.length;
   const bl = b.length;
-  /*if (al === bl && a === b) {
-    return 0;
-  }*/
   // char by char evaluation
   const l = Math.min(al, bl);
   let c = -1;
@@ -26,14 +22,6 @@ export const compareIcelandic = function (a, b) {
       return aV - bV;
     }
   }
-  /*
-  // words are not identical but didn't sort: this must be the same word but casing is different!
-  if (al === bl) {
-    if (a > b) { return -1; }
-    return a < b ? 1 : 0;
-  }
-  */
-  // words are not identical, so the longer one is the shorter+suffix
   return al - bl;
 };
 
