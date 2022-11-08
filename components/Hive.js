@@ -162,7 +162,7 @@ export default class Hive extends React.Component {
     const totalDuration = unitDuration * numUnits;
     const unitRotation = 60;
     const rotation = unitRotation * numUnits;
-    this.getLetters().forEach(letter => {
+    this.getLetters().slice(0,-1).forEach(letter => {
       const wrapper = this.wrappers[letter];
       wrapper.textRef.to({
         rotation: wrapper.textRef.rotation() - rotation,
@@ -275,15 +275,17 @@ export default class Hive extends React.Component {
                 <Text
                   ref={(node) => {
                     wrapper.textRef = node;
+                    //node?.cache({drawBorder: true});
                   }}
                   text={letter}
                   fill={'white'}
-                  fontSize={36}
-                  fontStyle={'bold'}
-                  x={0}
-                  y={0}
-                  offsetX={0.25*this.radius}
-                  offsetY={0.25*this.radius}
+                  fontSize={40}
+                  align={'center'}
+                  verticalAlign={'middle'}
+                  width={2*this.radius}
+                  height={2*this.radius}
+                  offsetX={this.radius-2}
+                  offsetY={this.radius-5}
                   rotation={0}
                 />
               </Group>
