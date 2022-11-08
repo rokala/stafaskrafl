@@ -1,31 +1,37 @@
+
+@import './settings.scss';
+
 .container {
-  display: grid;
-  grid:
-    "header" auto
-    "main" 1fr
-    "footer" auto
-    / 1fr;
-  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
 }
 
 .header {
-  grid-area: header;
 }
 
 .main {
-  padding: 4rem 0;
+  /*padding: 4rem 0;
   min-height: 100vh;
   display: flex;
   justify-content: space-evenly;
-  align-items: center;
+  align-items: center;*/
+	max-width: map-get($breakpoints, xl);
+	margin: 0 auto;
+  .game {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+  }
 }
 
 .footer {
-  grid-area: footer;
-}
+} 
 
+/*
 @media only screen and (max-width: 768px)  {
   .main {
     flex-direction: column;
   }
 } 
+*/

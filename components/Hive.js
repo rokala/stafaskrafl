@@ -231,12 +231,14 @@ export default class Hive extends React.Component {
   
   render() {
     this.updateWrapper();
+    const letters = Object.keys(this.wrappers);
     return (
-      <>
+      <div className={styles.hive}>
       <Input value={this.state.input} />
       <Stage width={2*this.center.x} height={2*this.center.y} >
         <Layer>
-          {Object.keys(this.wrappers).map(letter => {
+          {letters.map((letter, idx) => {
+            const isRequired = idx === letters.length - 1;
             const wrapper = this.wrappers[letter];
             const position = this.positions[wrapper.position]
             return (
@@ -300,7 +302,7 @@ export default class Hive extends React.Component {
           Enter
         </button>
       </div>
-      </>
+      </div>
     );
   }
 }

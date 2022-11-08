@@ -1,0 +1,11 @@
+$font-size-base: 16px;
+//$text-font-size-base-mobile: 14px;
+
+$breakpoints: (
+  xs: 0rem,   // < 576px
+  sm: 36rem,  // >= 576px
+  md: 48rem,  // >= 768
+  lg: 62rem,  // >= 992
+  xl: 75rem,  // >= 1200
+  xxl:87.5rem // >= 1400
+);
