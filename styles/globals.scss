@@ -1,7 +1,16 @@
 @import './settings.scss';
-  
+
+// TODO: Add _document file to replace #__next selector
+#__next {
+  display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}
+
 html,
 body {
+  height: 100%;
   font-size: $font-size-base;
   padding: 0;
   margin: 0;

@@ -175,11 +175,15 @@ export default class Hive extends React.Component {
       wrapper.groupRef.to({
           offsetX: 0,
           offsetY: 0,
+          scaleX: 0.5,
+          scaleY: 0.5,
           rotation: wrapper.groupRef.rotation() + 0.5*rotation,
           duration: 0.5*totalDuration,
           onFinish: () => {
             wrapper.groupRef.to({
             rotation: wrapper.groupRef.rotation() + 0.5*rotation,
+              scaleX: 1.0,
+              scaleY: 1.0,
               offsetX: this.positions[wrapper.position].x,
               offsetY: this.positions[wrapper.position].y,
               duration: 0.5*totalDuration,
@@ -195,7 +199,7 @@ export default class Hive extends React.Component {
   onCellHoverOn(target) {
     const polygon = target.getParent().children
       .find(child => child.className === 'RegularPolygon');
-    polygon.setAttrs({fill: '#121212'});
+    polygon.setAttrs({fill: '#1a1a1a'});
     const container = polygon.getStage().container();
     container.style.cursor = 'pointer';
   }
