@@ -8,7 +8,9 @@ export default class Input extends React.Component {
   render() {
     return (
       <div className={styles.input}>
+        <span>
           {this.props.value}
+        </span>
       </div>
     );
   }

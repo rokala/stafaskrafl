@@ -4,9 +4,10 @@
 .container {
   display: flex;
 	flex-direction: column;
-	align-items: center;
 	justify-content: space-between;
 	height: 100%;
+  max-width: 40%;
+	margin: 0 auto;
 }
 
 .header {
@@ -23,8 +24,13 @@
 }
 
 @media only screen and (max-width: 768px/*map-get($breakpoints, xs)*/)  {
+  .container {
+    max-width: initial;
+  }
+
   .main {
+    margin: 0 2em;
     flex-direction: column-reverse;
-    gap: 0;
+    gap: 1em;
   }
 } 

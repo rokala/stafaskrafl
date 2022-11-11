@@ -1,16 +1,60 @@
-.hive {
-  /*display: flex;
-  align-items: center;
-  gap: 2.5em;*/
-}
+.wrapper {
+  display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+  gap: 0.5em;
 
-.action {
-  text-align: center;
-  margin-top: 1em;
+  .action {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: .5em;
+    user-select: none;
+    
+    & > button {
+      cursor: pointer;
+      /*& > img {
+        width: 20px;
+        height: calc(0.68 * 20px);
+        color: #FFFFFF;
+      }*/
+    }
 
-  /*button > img {
-    width: 20px;
-    height: calc(0.68 * 20px);
-    color: #FFFFFF;
-  }*/
+    & > button:nth-child(2) {
+      font-size: 1.2em;
+      padding: 0.3em 0.6em;
+      border-radius: 5px
+    }
+
+    & > button:not(:nth-child(2)) {
+      border-radius: 50%;
+      width: 55px;
+      height: 55px;
+      padding: 0;
+      margin: 0;
+      background-color: transparent;
+      border:none;
+
+      & > img {
+        width: auto;
+	      height: 45px;
+        filter: invert(1) sepia(1) saturate(5) hue-rotate(175deg);
+
+        &:hover {
+          filter: invert(20%) sepia(10%) saturate(882%) hue-rotate(200deg) brightness(94%) contrast(94%);
+        }
+
+        &:focus-visible {
+          outline:none!important;
+          border:none;
+        }
+      }
+    }
+    /*
+    & > button:nth-child(3) {
+      transform: rotate(90deg);
+    }
+    */
+  }
 }

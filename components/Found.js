@@ -24,24 +24,24 @@ export default class Hive extends React.Component {
   getStatusMessage() {
     const numFound = this.props.words.length;
     if (numFound === 0) {
-      return 'Start guessing to find words';
+      return 'Start guessing to find words.';
     } else if (numFound === this.props.numSolutions) {
       return 'Well done! You found all the words!';
     } else {
-      return `${numFound} words found so far`;
+      return `${numFound} words found.`;
     }
   }
 
   render() {
     return (
-      <div className={styles.found}>
+      <div className={styles.wrapper}>
         <div className={styles.header}>
           <div>
             <div>Points: {this.calcProgress()} / 1000</div>
             <div>{this.getStatusMessage()}</div>
           </div>   
           {
-            this.props.words.length > 0 &&
+            this.props.words.length > 1 &&
             (        
             <div>
               <label htmlFor="sort-alphabetically">
@@ -58,15 +58,13 @@ export default class Hive extends React.Component {
             )
           }
         </div>
-        <div className={styles.outer}>
-          <div className={styles.inner}>
-            {
-              this.props.words.map(word => {
-                const usesAllLetters = numUniqueChars(word) === gameConfig.numLetterOptions
-                return <div key={word}>{word}</div>
-              })
-            }
-          </div>
+        <div className={styles.list}>
+          {
+            this.props.words.map(word => {
+              const usesAllLetters = numUniqueChars(word) === gameConfig.numLetterOptions
+              return <div key={word}>{word}</div>
+            })
+          }
         </div>
       </div>
     );

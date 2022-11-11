@@ -1,5 +1,5 @@
 import React from 'react';
-//import Image from 'next/image';
+import Image from 'next/image';
 import { Stage, Layer, Text, RegularPolygon, Group } from 'react-konva';
 import Input from './Input';
 import styles from '../styles/Hive.module.scss'
@@ -203,7 +203,7 @@ export default class Hive extends React.Component {
     const polygon = target.getParent().children
       .find(child => child.className === 'RegularPolygon');
     console.log( );
-    polygon.setAttrs({fill: polygon.name() === 'required' ? '#111D4A' : '#17171B'});
+    polygon.setAttrs({fill: polygon.name() === 'required' ? '#1C2852' : '#2A2A33'});
     const container = polygon.getStage().container();
     container.style.cursor = 'pointer';
   }
@@ -241,7 +241,7 @@ export default class Hive extends React.Component {
     this.updateWrapper();
     const letters = Object.keys(this.wrappers);
     return (
-      <div className={styles.hive}>
+      <div className={styles.wrapper}>
       <Input value={this.state.input} />
       <Stage width={2*this.center.x} height={2*this.center.y}>
         <Layer>
@@ -303,15 +303,14 @@ export default class Hive extends React.Component {
         </Layer>
       </Stage>
       <div className={styles.action}>
-        <button type="button" onClick={() => this.onRemoveLastInput()} disabled={this.state.input.length === 0}>
-          Delete
-        {/*<Image src="/backspace.svg" alt="Delete last character" width={40} height={0.68*40} color={'white'}/>*/}
+        <button type="button" onClick={() => this.onRemoveLastInput()} disabled={this.state.input.length === 0}> 
+          <Image src="/icons/delete-left-solid.svg" alt="Delete last character" width={40} height={0.68*40} color={'white'} />
         </button>
         <button type="button" onClick={() => this.onShuffle()} disabled={this.state.formLocked}>
           Stokka
         </button>
         <button type="button" onClick={() => this.onSubmitInput()} disabled={this.state.input.length === 0}>
-          Enter
+          <Image src="/icons/right-to-bracket-solid.svg" alt="Enter guess" width={40} height={0.68*40} color={'white'} />
         </button>
       </div>
       </div>
