@@ -1,4 +1,5 @@
 import React from 'react';
+//import Image from 'next/image';
 import { Stage, Layer, Text, RegularPolygon, Group } from 'react-konva';
 import Input from './Input';
 import styles from '../styles/Hive.module.scss'
@@ -158,7 +159,7 @@ export default class Hive extends React.Component {
 
   shuffleAnimation = (e) => {
     const numUnits = 4;
-    const unitDuration = 0.1;
+    const unitDuration = 0.08;
     const totalDuration = unitDuration * numUnits;
     const unitRotation = 60;
     const rotation = unitRotation * numUnits;
@@ -239,7 +240,7 @@ export default class Hive extends React.Component {
     return (
       <div className={styles.hive}>
       <Input value={this.state.input} />
-      <Stage width={2*this.center.x} height={2*this.center.y} >
+      <Stage width={2*this.center.x} height={2*this.center.y}>
         <Layer>
           {letters.map((letter, idx) => {
             const isRequired = idx === letters.length - 1;
@@ -279,10 +280,10 @@ export default class Hive extends React.Component {
                 <Text
                   ref={(node) => {
                     wrapper.textRef = node;
-                    //node?.cache({drawBorder: true});
+                    //node.cache({drawBorder: true});
                   }}
                   text={letter}
-                  fill={'white'}
+                  fill={'#ebebeb'}
                   fontSize={40}
                   align={'center'}
                   verticalAlign={'middle'}
@@ -297,9 +298,10 @@ export default class Hive extends React.Component {
           })}
         </Layer>
       </Stage>
-      <div className={styles.actions}>
+      <div className={styles.action}>
         <button type="button" onClick={() => this.onRemoveLastInput()} disabled={this.state.input.length === 0}>
           Delete
+        {/*<Image src="/backspace.svg" alt="Delete last character" width={40} height={0.68*40} color={'white'}/>*/}
         </button>
         <button type="button" onClick={() => this.onShuffle()} disabled={this.state.formLocked}>
           Shuffle

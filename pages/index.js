@@ -109,17 +109,15 @@ export default class Home extends React.Component {
         <nav className={styles.header}>
         </nav>
         <main className={styles.main}>
-          <div className={styles.game}>
-            <HiveDynamic
-              letters={this.props.letters}
-              submitGuess={this.onSubmitGuess}
-            />
-            <Found
-              words={[...this.state.found].sort(this.state.sortAlphabetically ? compareIcelandic : compareNone)}
-              handleChange={this.onChangeSort}
-              numSolutions={this.props.hashes.length}
-            />
-          </div>
+          <HiveDynamic
+            letters={this.props.letters}
+            submitGuess={this.onSubmitGuess}
+          />
+          <Found
+            words={[...this.state.found].sort(this.state.sortAlphabetically ? compareIcelandic : compareNone)}
+            handleChange={this.onChangeSort}
+            numSolutions={this.props.hashes.length}
+          />
         </main>
         <footer className={styles.footer}>
         </footer>

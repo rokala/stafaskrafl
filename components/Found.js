@@ -54,14 +54,16 @@ export default class Hive extends React.Component {
           <div>Progress: {this.calcProgress()}%</div>
           <div>{this.getStatusMessage()}</div>
         </div>
-        <ol>
-          {
-            this.props.words.map(word => {
-              const usesAllLetters = numUniqueChars(word) === gameConfig.numLetterOptions
-              return <li key={word}>{word}</li>
-            })
-          }
-        </ol>
+        <div className={styles.outer}>
+          <div className={styles.inner}>
+            {
+              this.props.words.map(word => {
+                const usesAllLetters = numUniqueChars(word) === gameConfig.numLetterOptions
+                return <div key={word}>{word}</div>
+              })
+            }
+          </div>
+        </div>
       </div>
     );
   }

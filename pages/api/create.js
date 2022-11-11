@@ -3,6 +3,10 @@ import { today, future } from '../../utils/dates';
 import GameComposer from '../../core/GameComposer';
 
 export default function handler(req, res) {
+  if (req.query.secret !== process.env.AUTH_KEY) {
+    return res.status(401).json({ message: 'Invalid token' });
+  }
+
   const todayDate = today();
   const futureDate = future(todayDate, parseInt(process.env.GAME_DAYS_ADVANCE));
 

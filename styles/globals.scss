@@ -2,9 +2,6 @@
 
 // TODO: Add _document file to replace #__next selector
 #__next {
-  display: flex;
-	align-items: center;
-	justify-content: center;
 	height: 100%;
 }
 
@@ -27,12 +24,16 @@ a {
   box-sizing: border-box;
 }
 
+.konvajs-content {
+  margin: 0 auto!important;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
   body {
-    color: white;
-    background: black;
+    color: #ebebeb;
+    background: #161616;
   }
 }

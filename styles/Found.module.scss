@@ -3,5 +3,27 @@
 
 .header {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
+
+.outer {
+  //height: 50vh;
+  height: 100%;
+  margin-top: 1em;
+  .inner {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height:100%;
+    overflow-x: auto;
+
+    div {
+      width: 105px;
+      margin-bottom: 0.3em;
+      padding-bottom: 0.3em;
+      padding-right: 1em;
+      border-bottom: 1px solid #2c2c2c;
+    }
+  }
+}
+

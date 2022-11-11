@@ -2,27 +2,29 @@
 @import './settings.scss';
 
 .container {
+  display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	height: 100%;
 }
 
 .header {
 }
 
 .main {
-	//max-width: map-get($breakpoints, xl);
-  .game {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-  }
+  display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 2em;
 }
 
 .footer {
-} 
+}
 
-/*
-@media only screen and (max-width: 768px)  {
+@media only screen and (max-width: 768px/*map-get($breakpoints, xs)*/)  {
   .main {
-    flex-direction: column;
+    flex-direction: column-reverse;
+    gap: 0;
   }
 } 
-*/
