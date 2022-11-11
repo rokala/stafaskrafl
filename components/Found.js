@@ -9,7 +9,7 @@ export default class Hive extends React.Component {
   }
 
   calcProgress() {
-    return Math.ceil(100 * this.props.words.length / this.props.numSolutions);
+    return Math.ceil(1000 * this.props.words.length / this.props.numSolutions);
   }
 
   /*
@@ -36,23 +36,27 @@ export default class Hive extends React.Component {
     return (
       <div className={styles.found}>
         <div className={styles.header}>
+          <div>
+            <div>Points: {this.calcProgress()} / 1000</div>
+            <div>{this.getStatusMessage()}</div>
+          </div>   
           {
             this.props.words.length > 0 &&
             (        
-            <label htmlFor="sort-alphabetically">
-            <input
-              type="checkbox"
-              id="sort-alphabetically"
-              name="sort-alphabetically"
-              defaultChecked={false}
-              onChange={this.props.handleChange}
-            />
-              A→Ö
-            </label>
+            <div>
+              <label htmlFor="sort-alphabetically">
+              <input
+                type="checkbox"
+                id="sort-alphabetically"
+                name="sort-alphabetically"
+                defaultChecked={false}
+                onChange={this.props.handleChange}
+              />
+                A→Ö
+              </label>
+            </div>
             )
           }
-          <div>Progress: {this.calcProgress()}%</div>
-          <div>{this.getStatusMessage()}</div>
         </div>
         <div className={styles.outer}>
           <div className={styles.inner}>

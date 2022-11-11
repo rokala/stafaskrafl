@@ -32,12 +32,14 @@ export default class Hive extends React.Component {
   }
 
   updateWrapper() {
-    this.getLetters().forEach((letter, idx) => {
+    const letters = this.getLetters();
+    letters.forEach((letter, idx) => {
       const propExists = hasProp.call(this.wrappers, letter);
       if (propExists) {
         this.wrappers[letter].position = idx;
       } else {
         this.wrappers[letter] = {
+          isRequired: letters.length - 1 === idx,
           position: idx,
           groupRef: null,
           textRef: null,
@@ -200,7 +202,8 @@ export default class Hive extends React.Component {
   onCellHoverOn(target) {
     const polygon = target.getParent().children
       .find(child => child.className === 'RegularPolygon');
-    polygon.setAttrs({fill: '#1a1a1a'});
+    console.log( );
+    polygon.setAttrs({fill: polygon.name() === 'required' ? '#111D4A' : '#17171B'});
     const container = polygon.getStage().container();
     container.style.cursor = 'pointer';
   }
@@ -208,7 +211,7 @@ export default class Hive extends React.Component {
   onCellHoverOff(target) {
     const polygon = target.getParent().children
       .find(child => child.className === 'RegularPolygon');
-    polygon.setAttrs({fill: '#2c2c2c'});
+    polygon.setAttrs({fill: polygon.name() === 'required' ? '#27325A' : '#353542'});
     this.onCellClickOff(polygon);
     const container = polygon.getStage().container();
     container.style.cursor = 'default';
@@ -243,7 +246,7 @@ export default class Hive extends React.Component {
       <Stage width={2*this.center.x} height={2*this.center.y}>
         <Layer>
           {letters.map((letter, idx) => {
-            const isRequired = idx === letters.length - 1;
+            //const isRequired = idx === letters.length - 1;
             const wrapper = this.wrappers[letter];
             const position = this.positions[wrapper.position]
             return (
@@ -268,11 +271,12 @@ export default class Hive extends React.Component {
                   ref={(node) => {
                     wrapper.polygonRef = node;
                   }}
+                  name={wrapper.isRequired ? 'required' : 'optional'}
                   x={0}
                   y={0}
                   sides={6}
                   radius={this.radius}
-                  fill={'#2c2c2c'}
+                  fill={wrapper.isRequired ? '#27325A' : '#353542'}
                   stroke={'#a1a1a1'}
                   strokeWidth={2}
                   rotation={30}
@@ -283,7 +287,7 @@ export default class Hive extends React.Component {
                     //node.cache({drawBorder: true});
                   }}
                   text={letter}
-                  fill={'#ebebeb'}
+                  fill={'#FFF8F0'}
                   fontSize={40}
                   align={'center'}
                   verticalAlign={'middle'}
@@ -304,7 +308,7 @@ export default class Hive extends React.Component {
         {/*<Image src="/backspace.svg" alt="Delete last character" width={40} height={0.68*40} color={'white'}/>*/}
         </button>
         <button type="button" onClick={() => this.onShuffle()} disabled={this.state.formLocked}>
-          Shuffle
+          Stokka
         </button>
         <button type="button" onClick={() => this.onSubmitInput()} disabled={this.state.input.length === 0}>
           Enter
