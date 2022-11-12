@@ -9,6 +9,9 @@ import { digestBrowser } from '../utils/digest';
 import hasProp from '../utils/hasProp';
 import { compareIcelandic, compareNone } from '../utils/alphabetSort';
 import tryParseJSONObject from '../utils/tryParseJsonObject';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const HiveDynamic = dynamic(() => import('../components/Hive'), {
   ssr: false,
@@ -73,27 +76,32 @@ export default class Home extends React.Component {
       return false;
     }
     if (word.length < gameConfig.minWordLength) {
-      console.log('This word is too short.');
+      toast(`🙄 4 bókstafir lágmark.`);
+      //console.log('This word is too short.');
       return false;
     }
     if (!word.includes(this.props.letters.required)) {
-      console.log(`The word must include a "${this.props.letters.required}"`);
+      toast(`😑 Verður að innihalda "${this.props.letters.required}"`);
+      //console.log(`The word must include a "${this.props.letters.required}"`);
       return false;
     }
     this.isValidWord(word)
       .then(isValid => {
         if (isValid) {
           if (this.state.found.includes(word)) {
-            console.log('You already found this word!');
+            toast(`😏 Þú ert búinn að finna þetta orð.`);
+            //console.log('You already found this word!');
             return false;
           } else {
+            toast(`🥳 Vel gert!`);
             const found = [word].concat(this.state.found);
             this.setState({ found: found });
             this.saveProgress(found);
             return true;
           }
         } else {
-          console.log('Word not found!');
+          toast(`😕 Orð ekki til á lista.`);
+          //console.log('Word not found!');
         }
       });
   }
@@ -109,6 +117,13 @@ export default class Home extends React.Component {
         <nav className={styles.header}>
         </nav>
         <main className={styles.main}>
+          <ToastContainer
+            position="top-center"
+            hideProgressBar
+            autoClose={1500}
+            closeOnClick={false}
+            theme="dark"
+          />
           <HiveDynamic
             letters={this.props.letters}
             submitGuess={this.onSubmitGuess}
