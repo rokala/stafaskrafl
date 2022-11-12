@@ -62,7 +62,11 @@ export default class Hive extends React.Component {
           {
             this.props.words.map(word => {
               const usesAllLetters = numUniqueChars(word) === gameConfig.numLetterOptions
-              return <div key={word}>{word}</div>
+              return (
+                <div key={word} className={usesAllLetters ? styles.pangram : ''}>
+                  {word}
+                </div>
+              );
             })
           }
         </div>

@@ -10,7 +10,7 @@ import hasProp from '../utils/hasProp';
 export default class Hive extends React.Component {
   state = {
     optional: this.props.letters.optional,
-    input: '',
+    input: [],
     formLocked: false,
   }
   constructor(props) {
@@ -115,10 +115,10 @@ export default class Hive extends React.Component {
       clearTimeout(this.timeoutId);
       this.timeoutId = null;
       if (this.isValidLetter(letter)) {
-        this.setState({ input: letter });
+        this.setState({ input: [letter] });
       } else {
         console.log(`Letter "${letter} is not eligible."`);
-        this.setState({ input: '' });
+        this.setState({ input: [] });
       }
       return;
     }
@@ -133,7 +133,7 @@ export default class Hive extends React.Component {
       this.onClearInput();
       return;
     }
-    this.setState({ input: this.state.input + letter });
+    this.setState({ input: this.state.input.concat(letter) });
   }
 
   onRemoveLastInput() {
@@ -143,7 +143,7 @@ export default class Hive extends React.Component {
   onClearInput(delay = 1000) {
     this.timeoutId = setTimeout(() => {
       this.timeoutId = null;
-      this.setState({ input: '' });
+      this.setState({ input: [] });
     }, delay);
   }
 
@@ -242,7 +242,7 @@ export default class Hive extends React.Component {
     const letters = Object.keys(this.wrappers);
     return (
       <div className={styles.wrapper}>
-      <Input value={this.state.input} />
+      <Input letters={this.state.input} required={this.props.letters.required}/>
       <Stage width={2*this.center.x} height={2*this.center.y}>
         <Layer>
           {letters.map((letter, idx) => {

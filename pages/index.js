@@ -85,16 +85,17 @@ export default class Home extends React.Component {
       //console.log(`The word must include a "${this.props.letters.required}"`);
       return false;
     }
-    this.isValidWord(word)
+    const wordVal = word.join('');
+    this.isValidWord(wordVal)
       .then(isValid => {
         if (isValid) {
-          if (this.state.found.includes(word)) {
+          if (this.state.found.includes(wordVal)) {
             toast(`😏 Þú ert búinn að finna þetta orð.`);
             //console.log('You already found this word!');
             return false;
           } else {
             toast(`🥳 Vel gert!`);
-            const found = [word].concat(this.state.found);
+            const found = [wordVal].concat(this.state.found);
             this.setState({ found: found });
             this.saveProgress(found);
             return true;

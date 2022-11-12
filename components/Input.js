@@ -8,9 +8,15 @@ export default class Input extends React.Component {
   render() {
     return (
       <div className={styles.input}>
-        <span>
-          {this.props.value}
-        </span>
+        {
+          this.props.letters.map((letter, idx) => {
+            return (
+              <span key={`input-${idx}`} className={letter === this.props.required ? styles.required : ''}>
+                {letter}
+              </span>
+            );
+          })
+        }
       </div>
     );
   }

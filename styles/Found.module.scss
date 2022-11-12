@@ -25,6 +25,11 @@
   }
 }
 
+.pangram {
+  font-weight: bold;
+  color: #ed9633;
+}
+
 @media only screen and (max-width: 768px/*map-get($breakpoints, xs)*/)  {
   .wrapper .list {
     max-height: 25vh;

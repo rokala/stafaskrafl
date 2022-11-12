@@ -37,17 +37,24 @@
       border:none;
 
       & > img {
+        transition: filter .2s;
         width: auto;
 	      height: 45px;
         filter: invert(67%) sepia(7%) saturate(78%) hue-rotate(267deg) brightness(89%) contrast(91%);
 
-        &:hover {
-          filter: invert(20%) sepia(10%) saturate(882%) hue-rotate(200deg) brightness(94%) contrast(94%);
-        }
-
         &:focus-visible {
           outline:none!important;
           border:none;
+        }
+      }
+
+      &:disabled > img {
+        filter: invert(17%) sepia(6%) saturate(1166%) hue-rotate(202deg) brightness(91%) contrast(89%);
+      }
+
+      &:not([disabled]) > img {
+        &:active {
+          filter: invert(20%) sepia(10%) saturate(882%) hue-rotate(200deg) brightness(94%) contrast(94%);
         }
       }
     }
