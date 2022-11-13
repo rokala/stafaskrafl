@@ -68,6 +68,9 @@ export default class Hive extends React.Component {
 
   componentDidMount() {
     window.addEventListener('keydown', (e) => {
+      if (this.state.formLocked) {
+        return;
+      }
       const char = e.key.toUpperCase();
       switch(char) {
         case 'ENTER':
@@ -126,8 +129,6 @@ export default class Hive extends React.Component {
       console.log(`Letter "${letter} is not eligible."`);
       return;
     }
-    //this.onCellClickOn(e.target);
-    //this.onCellClickOff(e.target);
     if (this.state.input.length > gameConfig.maxWordLength) {
       console.log('This word is too long!');
       this.onClearInput();
@@ -243,8 +244,8 @@ export default class Hive extends React.Component {
   onCellClickOn(target) {
     target.getParent().children.forEach(child => {
       child.to({
-        scaleX: 0.95,
-        scaleY: 0.95,
+        scaleX: 0.93,
+        scaleY: 0.93,
         duration: 0.08
       });
     });
@@ -300,7 +301,7 @@ export default class Hive extends React.Component {
                   sides={6}
                   radius={this.radius}
                   fill={wrapper.isRequired ? '#a69cac' : '#36384C'}
-                  stroke={'#a1a1a1'}
+                  stroke={wrapper.isRequired ? '#36384C' : '#a1a1a1'}
                   strokeWidth={2}
                   rotation={30}
                 />
@@ -315,7 +316,7 @@ export default class Hive extends React.Component {
                   fontSize={40}
                   align={'center'}
                   verticalAlign={'middle'}
-                  fontStyle={'bold'}
+                  fontStyle={wrapper.isRequired ? 'bold' : 'normal'}
                   width={2*this.radius}
                   height={2*this.radius}
                   offsetX={this.radius-2}
@@ -328,13 +329,13 @@ export default class Hive extends React.Component {
         </Layer>
       </Stage>
       <div className={styles.action}>
-        <button type="button" onClick={() => this.onRemoveLastInput()} disabled={this.state.input.length === 0}> 
+        <button type="button" onClick={() => this.onRemoveLastInput()} disabled={this.state.input.length === 0 || this.state.formLocked}> 
           <Image src="/icons/delete-left-solid.svg" alt="Delete last character" width={40} height={0.68*40} color={'white'} />
         </button>
         <button type="button" onClick={() => this.onShuffle()} disabled={this.state.formLocked}>
           Stokka
         </button>
-        <button type="button" onClick={() => this.onSubmitInput()} disabled={this.state.input.length === 0}>
+        <button type="button" onClick={() => this.onSubmitInput()} disabled={this.state.input.length === 0 || this.state.formLocked}>
           <Image src="/icons/right-to-bracket-solid.svg" alt="Enter guess" width={40} height={0.68*40} color={'white'} />
         </button>
       </div>

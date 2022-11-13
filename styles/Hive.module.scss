@@ -2,27 +2,22 @@
   display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-  gap: 0.5em;
+  gap: 1em;
 
   .action {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    margin-top: .5em;
     user-select: none;
 
     & > button {
       cursor: pointer;
-      /*& > img {
-        width: 20px;
-        height: calc(0.68 * 20px);
-        color: #FFFFFF;
-      }*/
     }
 
     & > button:nth-child(2) {
-      font-size: 1.2em;
+      font-size: 1em;
+	    text-transform: uppercase;
       padding: 0.3em 0.6em;
       border-radius: 5px;
       border: 1px solid #818181;

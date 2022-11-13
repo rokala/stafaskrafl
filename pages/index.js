@@ -76,12 +76,12 @@ export default class Home extends React.Component {
       return false;
     }
     if (word.length < gameConfig.minWordLength) {
-      toast(`❌ 4 bókstafir lágmark.`);
+      toast(`❌ Of stutt, lágmark 4 bókstafir.`);
       //console.log('This word is too short.');
       return false;
     }
     if (!word.includes(this.props.letters.required)) {
-      toast(`❌ Verður að innihalda "${this.props.letters.required}"`);
+      toast(`❌ Orðið verður að innihalda "${this.props.letters.required}"`);
       //console.log(`The word must include a "${this.props.letters.required}"`);
       return false;
     }
@@ -90,18 +90,18 @@ export default class Home extends React.Component {
       .then(isValid => {
         if (isValid) {
           if (this.state.found.includes(wordVal)) {
-            toast(`⚠️ Þú ert búinn að finna þetta orð.`);
+            toast(`🦜 "${wordVal}" er nú þegar fundið.`);
             //console.log('You already found this word!');
             return false;
           } else {
-            toast(`✔️ Vel gert!`);
+            toast(`✔️ "${wordVal}" fannst, vel gert!`);
             const found = [wordVal].concat(this.state.found);
             this.setState({ found: found });
             this.saveProgress(found);
             return true;
           }
         } else {
-          toast(`❌ Orð ekki til á lista.`);
+          toast(`⛔ "${wordVal}" er ekki gilt.`);
           //console.log('Word not found!');
         }
       });
@@ -109,6 +109,14 @@ export default class Home extends React.Component {
 
   render() {
     return (
+      <>
+      <ToastContainer
+          position="top-center"
+          hideProgressBar
+          autoClose={1500}
+          closeOnClick={false}
+          theme="dark"
+        />
       <div className={styles.container}>
         <Head>
           <title>Stafaskrafl</title>
@@ -118,13 +126,6 @@ export default class Home extends React.Component {
         <nav className={styles.header}>
         </nav>
         <main className={styles.main}>
-          <ToastContainer
-            position="top-center"
-            hideProgressBar
-            autoClose={1500}
-            closeOnClick={false}
-            theme="dark"
-          />
           <HiveDynamic
             letters={this.props.letters}
             submitGuess={this.onSubmitGuess}
@@ -138,6 +139,7 @@ export default class Home extends React.Component {
         <footer className={styles.footer}>
         </footer>
       </div>
+      </>
     )
   }
 }

@@ -29,8 +29,10 @@
   }
 
   .main {
-    margin: 0 2em;
     flex-direction: column-reverse;
+    justify-content: space-between;
     gap: 1em;
+    height: 100%;
+    margin: 0 2em;
   }
 } 
