@@ -336,7 +336,7 @@ export default class Hive extends React.Component {
           Stokka
         </button>
         <button type="button" onClick={() => this.onSubmitInput()} disabled={this.state.input.length === 0 || this.state.formLocked}>
-          <Image src="/icons/right-to-bracket-solid.svg" alt="Enter guess" width={40} height={0.68*40} color={'white'} />
+          <Image src="/icons/check-solid.svg" alt="Enter guess" width={40} height={0.68*40} color={'white'} />
         </button>
       </div>
       </div>
