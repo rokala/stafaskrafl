@@ -24,7 +24,7 @@ export default class Found extends React.Component {
   numFoundMessage() {
     const numFound = this.props.words.length;
     if (numFound === 0) {
-      return <span>Start guessing to find words.</span>
+      return;
     } else if (numFound === this.props.numSolutions) {
       return <span>Well done! You found all the words!</span>
     } else {
