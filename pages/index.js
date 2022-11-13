@@ -63,7 +63,7 @@ export default class Home extends React.Component {
     try {
       localStorage.setItem('skrafl_state', json)
     } catch {
-      console.error('Could not save game status, your local storage is probably full.');
+      console.error('Could not save game status, clients local storage is probably full.');
     }
   }
 
@@ -77,12 +77,10 @@ export default class Home extends React.Component {
     }
     if (word.length < gameConfig.minWordLength) {
       toast(`❌ Of stutt, lágmark 4 bókstafir.`);
-      //console.log('This word is too short.');
       return false;
     }
     if (!word.includes(this.props.letters.required)) {
       toast(`❌ Orðið verður að innihalda "${this.props.letters.required}"`);
-      //console.log(`The word must include a "${this.props.letters.required}"`);
       return false;
     }
     const wordVal = word.join('');
@@ -91,7 +89,6 @@ export default class Home extends React.Component {
         if (isValid) {
           if (this.state.found.includes(wordVal)) {
             toast(`🦜 "${wordVal}" er nú þegar fundið.`);
-            //console.log('You already found this word!');
             return false;
           } else {
             toast(`✔️ "${wordVal}" fannst, vel gert!`);
@@ -102,7 +99,6 @@ export default class Home extends React.Component {
           }
         } else {
           toast(`⛔ "${wordVal}" finnst ekki.`);
-          //console.log('Word not found!');
         }
       });
   }

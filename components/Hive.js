@@ -63,7 +63,7 @@ export default class Hive extends React.Component {
 
   onSubmitInput() {
     this.props.submitGuess(this.state.input);
-    this.onClearInput();
+    this.onClearInput(0);
   }
 
   componentDidMount() {
@@ -120,17 +120,17 @@ export default class Hive extends React.Component {
       if (this.isValidLetter(letter)) {
         this.setState({ input: [letter] });
       } else {
-        console.log(`Letter "${letter} is not eligible."`);
+        //console.log(`Letter "${letter} is not eligible."`);
         this.setState({ input: [] });
       }
       return;
     }
     if (!this.isValidLetter(letter)) {
-      console.log(`Letter "${letter} is not eligible."`);
+      //console.log(`Letter "${letter} is not eligible."`);
       return;
     }
     if (this.state.input.length > gameConfig.maxWordLength) {
-      console.log('This word is too long!');
+      //console.log('This word is too long!');
       this.onClearInput();
       return;
     }

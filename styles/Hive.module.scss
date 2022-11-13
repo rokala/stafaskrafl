@@ -17,14 +17,23 @@
 
     & > button:nth-child(2) {
       font-size: 1em;
-	    text-transform: uppercase;
-      padding: 0.3em 0.6em;
-      border-radius: 5px;
-      border: 1px solid #818181;
+      text-transform: uppercase;
+      padding: 0.5em 0.8em;
+      border-radius: 6px;
+      background-color: #13172c;
+      border: 1px solid #36384c;
+      letter-spacing: 1px;
       &:hover {
         color: #cfcfcf;
 	      background-color: #36384c;
 	      border-color: #606274;
+      }
+
+      &:disabled {
+        //cursor: not-allowed;
+        background-color: #272a3e;
+        border-color: #36384c;
+        color: #a69cac;
       }
     }
 
@@ -58,4 +67,10 @@
       }
     }
   }
+}
+
+.delete {
+  fill: green!important;
+  stroke-width: 3!important;
+  stroke: #491EC4!important;
 }

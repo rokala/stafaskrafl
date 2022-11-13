@@ -18,7 +18,7 @@ export default class Input extends React.Component {
         );
       });
     } else if (this.showPlaceholder) {
-      return <span className={styles.placeholder}>Sláðu inn orð...</span>;
+      return <span className={styles.placeholder}>Skrifaðu orð...</span>;
     }
   }
   

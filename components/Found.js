@@ -28,7 +28,7 @@ export default class Found extends React.Component {
     } else if (numFound === this.props.numSolutions) {
       return <span>Well done! You found all the words!</span>
     } else {
-      return <span><b>{numFound}</b> orð fundin.</span>
+      return <span>Orð fundin: <b>{numFound}</b></span>
     }
   }
 
@@ -36,30 +36,29 @@ export default class Found extends React.Component {
     return (
       <div className={styles.wrapper}>
         <div className={styles.header}>
-          <div>
-            <div>
-              <b>{this.calcScore()}</b> stig.
-            </div>
-            <div>
-              {this.numFoundMessage()}
-            </div>
-          </div>               
-          <div>
-            <button
-              type="button"
-              onClick={this.props.handleSort}
-              disabled={this.props.words.length < 2}
-              className={this.props.alphabeticSort ? 'active' : ''}
-            >
-              <Image
-                src="/icons/arrow-down-a-z-solid.svg"
-                alt="Toggle alphabetic sort"
-                width={50}
-                height={0.68*50}
-                color={'white'}
-              />
-            </button>
-          </div>          
+        <div>
+          <button
+            type="button"
+            onClick={this.props.handleSort}
+            disabled={this.props.words.length < 2}
+            className={this.props.alphabeticSort ? 'active' : ''}
+            title="Toggle sort alphabetically"
+          >
+            <Image
+              src="/icons/arrow-down-a-z-solid.svg"
+              alt="Toggle alphabetic sort"
+              width={50}
+              height={0.68*50}
+              color={'white'}
+            />
+          </button>
+        </div> 
+        <div>
+          {this.numFoundMessage()}
+        </div>  
+        <div>
+          Stig: <b>{this.calcScore()}</b>
+        </div>       
         </div>
         <div className={styles.list}>
           {

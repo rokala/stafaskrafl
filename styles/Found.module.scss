@@ -1,21 +1,28 @@
 .wrapper {
-  width: 100%;
+  display: flex;
+	flex-direction: column;
+	justify-content: stretch;
+	width: 100%;
   height: 100%;
+	min-height: 400px;
   .header {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+    padding: 0 0.5em;
     button {
       cursor: pointer;
       padding: 0;
       margin: 0;
       background-color: transparent;
       border:none;
-      //filter: invert(67%) sepia(7%) saturate(78%) hue-rotate(267deg) brightness(89%) contrast(91%);
-
       & > img {
+        transition: .2s filter linear, .2s -webkit-filter linear;
         filter: invert(67%) sepia(7%) saturate(78%) hue-rotate(267deg) brightness(89%) contrast(91%);
       }
-      
+
       &:disabled > img {
         filter: invert(10%) sepia(5%) saturate(6023%) hue-rotate(195deg) brightness(98%) contrast(83%);
         cursor: not-allowed;
@@ -24,8 +31,6 @@
 
     &.active > img {
       filter: invert(96%) sepia(2%) saturate(1385%) hue-rotate(324deg) brightness(102%) contrast(101%); // korrek
-      //filter: invert(94%) sepia(62%) saturate(2%) hue-rotate(328deg) brightness(116%) contrast(101%)!important; // white
-      //filter: invert(33%) sepia(99%) saturate(6386%) hue-rotate(287deg) brightness(97%) contrast(129%)!important;
     }
   }
   .list {
@@ -35,8 +40,12 @@
     height:100%;
     max-height: 65vh;
     overflow-x: auto;
-
-    div {
+    border: 1px solid #36384c;
+    border-radius: 12px;
+    //border-bottom: none;
+    padding: 1.2em 0.5em;
+  
+    & > div {
       display: list-item; 
       list-style-type: decimal;
       width: 105px;
