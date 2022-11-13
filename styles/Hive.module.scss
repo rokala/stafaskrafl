@@ -24,7 +24,13 @@
     & > button:nth-child(2) {
       font-size: 1.2em;
       padding: 0.3em 0.6em;
-      border-radius: 5px
+      border-radius: 5px;
+      border: 1px solid #818181;
+      &:hover {
+        color: #cfcfcf;
+	      background-color: #36384c;
+	      border-color: #606274;
+      }
     }
 
     & > button:not(:nth-child(2)) {
@@ -49,7 +55,8 @@
       }
 
       &:disabled > img {
-        filter: invert(17%) sepia(6%) saturate(1166%) hue-rotate(202deg) brightness(91%) contrast(89%);
+        filter: invert(10%) sepia(5%) saturate(6023%) hue-rotate(195deg) brightness(98%) contrast(83%);
+        cursor: not-allowed;
       }
 
       &:not([disabled]) > img {

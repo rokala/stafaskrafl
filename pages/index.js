@@ -76,12 +76,12 @@ export default class Home extends React.Component {
       return false;
     }
     if (word.length < gameConfig.minWordLength) {
-      toast(`🙄 4 bókstafir lágmark.`);
+      toast(`❌ 4 bókstafir lágmark.`);
       //console.log('This word is too short.');
       return false;
     }
     if (!word.includes(this.props.letters.required)) {
-      toast(`😑 Verður að innihalda "${this.props.letters.required}"`);
+      toast(`❌ Verður að innihalda "${this.props.letters.required}"`);
       //console.log(`The word must include a "${this.props.letters.required}"`);
       return false;
     }
@@ -90,18 +90,18 @@ export default class Home extends React.Component {
       .then(isValid => {
         if (isValid) {
           if (this.state.found.includes(wordVal)) {
-            toast(`😏 Þú ert búinn að finna þetta orð.`);
+            toast(`⚠️ Þú ert búinn að finna þetta orð.`);
             //console.log('You already found this word!');
             return false;
           } else {
-            toast(`🥳 Vel gert!`);
+            toast(`✔️ Vel gert!`);
             const found = [wordVal].concat(this.state.found);
             this.setState({ found: found });
             this.saveProgress(found);
             return true;
           }
         } else {
-          toast(`😕 Orð ekki til á lista.`);
+          toast(`❌ Orð ekki til á lista.`);
           //console.log('Word not found!');
         }
       });

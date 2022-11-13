@@ -1,4 +1,5 @@
 @import './settings.scss';
+@import './colors.css';
 
 // TODO: Add _document file to replace #__next selector
 #__next {
@@ -13,6 +14,11 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+body {
+  background: var(--color-bg-dark);
+  color: var(--color-text-dark);
 }
 
 a {
@@ -31,10 +37,11 @@ a {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
-  }
-  body {
-    color: #ebebeb;
-    background: #1E1E24;
+
+    body {
+      color: var(--color-text-dark);
+      background: var(--color-bg-dark);
+    }
   }
 }
 

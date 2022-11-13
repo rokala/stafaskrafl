@@ -1,13 +1,47 @@
 .input {
-  min-height: 2em;
+  height: 2em;
   text-align: center;
   font-size: 1.6em;
 
   & > span {
     vertical-align: middle;
   }
+
+  .wrapper {
+    display: inline-block;
+    position: relative;
+    letter-spacing: 0.05em;
+    height: 100%;
+
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0.1em;
+      left: -3px;
+      width: 3px;
+      height: 1.25em;
+      background: #a69cac;
+      animation: caret-blink 1s steps(2, start) infinite;
+    }
+
+    @keyframes caret-blink {
+      to {
+        visibility: hidden;
+      }
+    }
+
+    &.caretRight:after {
+      right: -5px;
+      left: initial;
+    }
+  }
 }
 
 .required {
-  color: #6881dd;
+  color: #a69cac;
+}
+
+.placeholder {
+  color: #a69cac;
 }

@@ -200,18 +200,41 @@ export default class Hive extends React.Component {
   };
 
   onCellHoverOn(target) {
-    const polygon = target.getParent().children
-      .find(child => child.className === 'RegularPolygon');
-    console.log( );
-    polygon.setAttrs({fill: polygon.name() === 'required' ? '#1C2852' : '#2A2A33'});
+    const parent = target.getParent();
+    const polygon = parent.children.find(child => child.className === 'RegularPolygon');
+    polygon.to({
+      fill: polygon.name() === 'required' ? '#13172C' : '#25283C',
+      duration: 0.1
+    });
+
+    const text = parent.children.find(child => child.className === 'Text');
+    if (text.name() === 'required') {
+      text.to({
+        fill: '#fff8f0',
+        duration: 0.1
+      });
+    }
+    
     const container = polygon.getStage().container();
     container.style.cursor = 'pointer';
   }
 
   onCellHoverOff(target) {
-    const polygon = target.getParent().children
-      .find(child => child.className === 'RegularPolygon');
-    polygon.setAttrs({fill: polygon.name() === 'required' ? '#27325A' : '#353542'});
+    const parent = target.getParent();
+    const polygon = parent.children.find(child => child.className === 'RegularPolygon');
+    polygon.to({
+      fill: polygon.name() === 'required' ? '#a69cac' : '#36384C',
+      duration: 0.1
+    });
+
+    const text = parent.children.find(child => child.className === 'Text');
+    if (text.name() === 'required') {
+      text.to({
+        fill: '#13172C',
+        duration: 0.1
+      });
+    }
+      
     this.onCellClickOff(polygon);
     const container = polygon.getStage().container();
     container.style.cursor = 'default';
@@ -276,7 +299,7 @@ export default class Hive extends React.Component {
                   y={0}
                   sides={6}
                   radius={this.radius}
-                  fill={wrapper.isRequired ? '#27325A' : '#353542'}
+                  fill={wrapper.isRequired ? '#a69cac' : '#36384C'}
                   stroke={'#a1a1a1'}
                   strokeWidth={2}
                   rotation={30}
@@ -286,11 +309,13 @@ export default class Hive extends React.Component {
                     wrapper.textRef = node;
                     //node.cache({drawBorder: true});
                   }}
+                  name={wrapper.isRequired ? 'required' : 'optional'}
                   text={letter}
-                  fill={'#FFF8F0'}
+                  fill={wrapper.isRequired ? '#13172C' : '#FFF8F0'}
                   fontSize={40}
                   align={'center'}
                   verticalAlign={'middle'}
+                  fontStyle={'bold'}
                   width={2*this.radius}
                   height={2*this.radius}
                   offsetX={this.radius-2}
