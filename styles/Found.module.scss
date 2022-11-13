@@ -33,7 +33,7 @@
       filter: invert(96%) sepia(2%) saturate(1385%) hue-rotate(324deg) brightness(102%) contrast(101%); // korrek
     }
   }
-  .list {
+  & > .list {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -62,7 +62,10 @@
 }
 
 @media only screen and (max-width: 768px/*map-get($breakpoints, xs)*/)  {
-  .wrapper .list {
-    max-height: 25vh;
-  }
+  .wrapper {
+    min-height: initial;
+    & > .list {
+      max-height: 25vh;
+    }
+  } 
 } 
