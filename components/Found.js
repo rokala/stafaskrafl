@@ -1,34 +1,34 @@
 import React from 'react';
+import Image from 'next/image';
 import { gameConfig } from '../core/gameConfig';
 import { numUniqueChars } from '../utils/numUniqueChars'; 
 import styles from '../styles/Found.module.scss'
 
-export default class Hive extends React.Component {
+export default class Found extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  calcProgress() {
-    return Math.ceil(1000 * this.props.words.length / this.props.numSolutions);
-  }
-
-  /*
   calcScore() {
-    return this.props.words.reduce((prev, curr) => prev + numUniqueChars(curr) * curr.length, 0);
+    const score = this.props.words.reduce(
+      (prev, curr) => {
+        const numUnique = numUniqueChars(curr);
+        const multiplier = numUnique === gameConfig.numLetterOptions ? 2*numUnique : numUnique;
+        return prev + (multiplier * numUniqueChars(curr)) + curr.length
+      },
+      0
+    );
+    return score;
   }
 
-  calcScore2() {
-    return this.props.words.reduce((prev, curr) => prev + 2 * numUniqueChars(curr) + curr.length, 0);
-  }
-  */
-  getStatusMessage() {
+  numFoundMessage() {
     const numFound = this.props.words.length;
     if (numFound === 0) {
-      return 'Start guessing to find words.';
+      return <span>Start guessing to find words.</span>
     } else if (numFound === this.props.numSolutions) {
-      return 'Well done! You found all the words!';
+      return <span>Well done! You found all the words!</span>
     } else {
-      return `${numFound} words found.`;
+      return <span><b>{numFound}</b> orð fundin.</span>
     }
   }
 
@@ -37,26 +37,29 @@ export default class Hive extends React.Component {
       <div className={styles.wrapper}>
         <div className={styles.header}>
           <div>
-            <div>Points: {this.calcProgress()} / 1000</div>
-            <div>{this.getStatusMessage()}</div>
-          </div>   
-          {
-            this.props.words.length > 1 &&
-            (        
             <div>
-              <label htmlFor="sort-alphabetically">
-              <input
-                type="checkbox"
-                id="sort-alphabetically"
-                name="sort-alphabetically"
-                defaultChecked={false}
-                onChange={this.props.handleChange}
-              />
-                A→Ö
-              </label>
+              <b>{this.calcScore()}</b> stig.
             </div>
-            )
-          }
+            <div>
+              {this.numFoundMessage()}
+            </div>
+          </div>               
+          <div>
+            <button
+              type="button"
+              onClick={this.props.handleSort}
+              disabled={this.props.words.length < 2}
+              className={this.props.alphabeticSort ? 'active' : ''}
+            >
+              <Image
+                src="/icons/arrow-down-a-z-solid.svg"
+                alt="Toggle alphabetic sort"
+                width={50}
+                height={0.68*50}
+                color={'white'}
+              />
+            </button>
+          </div>          
         </div>
         <div className={styles.list}>
           {

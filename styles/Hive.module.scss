@@ -29,9 +29,6 @@
     }
 
     & > button:not(:nth-child(2)) {
-      border-radius: 50%;
-      width: 55px;
-      height: 55px;
       padding: 0;
       margin: 0;
       background-color: transparent;
@@ -60,10 +57,5 @@
         }
       }
     }
-    /*
-    & > button:nth-child(3) {
-      transform: rotate(90deg);
-    }
-    */
   }
 }

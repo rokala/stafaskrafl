@@ -68,7 +68,7 @@ export default class Home extends React.Component {
   }
 
   onChangeSort = (e) => {
-    this.setState({ sortAlphabetically: e.target.checked });
+    this.setState({ sortAlphabetically: !this.state.sortAlphabetically });
   }
 
   onSubmitGuess = (word) => {
@@ -101,7 +101,7 @@ export default class Home extends React.Component {
             return true;
           }
         } else {
-          toast(`⛔ "${wordVal}" er ekki gilt.`);
+          toast(`⛔ "${wordVal}" finnst ekki.`);
           //console.log('Word not found!');
         }
       });
@@ -132,7 +132,8 @@ export default class Home extends React.Component {
           />
           <Found
             words={[...this.state.found].sort(this.state.sortAlphabetically ? compareIcelandic : compareNone)}
-            handleChange={this.onChangeSort}
+            alphabeticSort={this.state.sortAlphabetically}
+            handleSort={this.onChangeSort}
             numSolutions={this.props.hashes.length}
           />
         </main>
