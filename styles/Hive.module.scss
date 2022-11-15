@@ -75,3 +75,10 @@
   stroke-width: 3!important;
   stroke: #491EC4!important;
 }
+
+@media only screen and (max-width: 768px/*map-get($breakpoints, xs)*/)  {
+  .wrapper {
+    flex: 6;
+    justify-content: center;
+  } 
+} 

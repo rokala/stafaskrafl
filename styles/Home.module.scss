@@ -4,35 +4,41 @@
 .container {
   display: flex;
 	flex-direction: column;
+  flex-wrap: wrap;
 	justify-content: space-between;
-	height: 100%;
-  max-width: max(40%, 700px);
-	margin: 0 auto;
+	min-height: calc(100vh - 1em);
+  margin: 1em 0;
 }
 
 .header {
+  background-color: #a69cac;
 }
 
 .main {
   display: flex;
 	flex-direction: row;
+  justify-content: flex-end;
 	align-items: center;
 	gap: 2em;
+	margin: 0 auto;
+  width: 100%;
+  max-width: max(40%, 750px);
 }
 
 .footer {
+  background-color: #25283C;
 }
 
 @media only screen and (max-width: 768px/*map-get($breakpoints, xs)*/)  {
-  .container {
-    max-width: initial;
+  .header {
+    //flex: 0 0 4em;
   }
-
   .main {
+    flex: 1 0;
     flex-direction: column-reverse;
-    justify-content: space-between;
     gap: 1em;
-    height: 100%;
-    margin: 0 2em;
+  }
+  .footer {
+    //flex: 0 0 8em;
   }
 } 

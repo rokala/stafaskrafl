@@ -21,12 +21,14 @@ const HiveDynamic = dynamic(() => import('../components/Hive'), {
 export default class Home extends React.Component {
   state = {
     found: [],
+    foundIsExpanded: false,
     sortAlphabetically: false,
   }
 
   constructor(props) {
     super(props);
     this.onChangeSort.bind(this);
+    this.onToggleExpand.bind(this);
     this.timeoutId = null;
     this.gameId = props.id;
   }
@@ -65,6 +67,10 @@ export default class Home extends React.Component {
     } catch {
       console.error('Could not save game status, clients local storage is probably full.');
     }
+  }
+
+  onToggleExpand = () => {
+    this.setState({ foundIsExpanded: !this.state.foundIsExpanded });
   }
 
   onChangeSort = (e) => {
@@ -121,7 +127,7 @@ export default class Home extends React.Component {
         </Head>
         <nav className={styles.header}>
         </nav>
-        <main className={styles.main}>
+        <main className={`${styles.main} ${this.state.foundIsExpanded ? 'expand' : ''}`}>
           <HiveDynamic
             letters={this.props.letters}
             submitGuess={this.onSubmitGuess}
@@ -131,6 +137,7 @@ export default class Home extends React.Component {
             alphabeticSort={this.state.sortAlphabetically}
             handleSort={this.onChangeSort}
             numSolutions={this.props.hashes.length}
+            handleExpand={this.onToggleExpand}
           />
         </main>
         <footer className={styles.footer}>

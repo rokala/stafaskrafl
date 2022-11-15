@@ -1,24 +1,20 @@
 @import './settings.scss';
 @import './colors.css';
 
-// TODO: Add _document file to replace #__next selector
-#__next {
-	height: 100%;
-}
-
-html,
-body {
+html {
   height: 100%;
   font-size: $font-size-base;
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 
-body {
-  background: var(--color-bg-dark);
-  color: var(--color-text-dark);
+  &, body {
+    padding: 0;
+    margin: 0;
+  }
+  & > body {
+    background: var(--color-bg-dark);
+    color: var(--color-text-dark);
+    min-height: 100%;
+  }
 }
 
 a {
@@ -34,9 +30,30 @@ a {
   margin: 0 auto!important;
 }
 
-.Found_wrapper__1GAYW .Found_header__uHqig button.active > img {
-	filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(60deg) brightness(103%) contrast(102%);
+.expand {
+  .horizontal {
+    visibility: hidden!important;
+  }
+  .vertical {
+    position: initial!important;
+    visibility: visible!important;
+    display: flex!important;
+    //height: auto!important;
+  }
+  .hive {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+  }
+  .found-accordion {
+    height: 100%!important;
+  }
+
+  .button-expand img {
+    transform: rotate(180deg);
+  }
 }
+
 
 @media (prefers-color-scheme: dark) {
   html {
