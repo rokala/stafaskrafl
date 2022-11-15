@@ -75,6 +75,7 @@
         overflow-x: auto;
         padding: 1em 0 1em 1em;
         & > * {
+          display: inline;
           margin-right: 1em;
           letter-spacing: .5px;
         }

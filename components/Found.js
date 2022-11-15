@@ -33,6 +33,17 @@ export default class Found extends React.Component {
     }
   }
 
+  renderList() {
+    return this.props.words.map(word => {
+      const usesAllLetters = numUniqueChars(word) === gameConfig.numLetterOptions
+      return (
+        <div key={word} className={usesAllLetters ? styles.pangram : ''}>
+          {word}
+        </div>
+      );
+    });
+  }
+
   render() {
     return (
       <div className={styles.wrapper}>
@@ -64,16 +75,7 @@ export default class Found extends React.Component {
         <div className={`${styles.compact} found-accordion`}>
           <div className={styles.header}>
             <div className={`${styles.horizontal} horizontal`}>
-            {
-              this.props.words.map(word => {
-                const usesAllLetters = numUniqueChars(word) === gameConfig.numLetterOptions
-                return (
-                  <span key={word} className={usesAllLetters ? styles.pangram : ''}>
-                    {word}
-                  </span>
-                );
-              })
-            }
+              {this.renderList()}
             </div>
             <button
               className={`${styles.expand} button-expand`}
@@ -83,29 +85,11 @@ export default class Found extends React.Component {
             </button>
           </div>
           <div className={`${styles.vertical} vertical`}>
-          {
-            this.props.words.map(word => {
-              const usesAllLetters = numUniqueChars(word) === gameConfig.numLetterOptions
-              return (
-                <div key={word} className={usesAllLetters ? styles.pangram : ''}>
-                  {word}
-                </div>
-              );
-            })
-          }
+            {this.renderList()}
           </div>
         </div>
         <div className={styles.list}>
-          {
-            this.props.words.map(word => {
-              const usesAllLetters = numUniqueChars(word) === gameConfig.numLetterOptions
-              return (
-                <div key={word} className={usesAllLetters ? styles.pangram : ''}>
-                  {word}
-                </div>
-              );
-            })
-          }
+          {this.renderList()}
         </div>
       </div>
     );
