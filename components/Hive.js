@@ -82,7 +82,7 @@ export default class Hive extends React.Component {
         default:
           this.onAddLetter(char);
           if (hasProp.call(this.wrappers, char)) {
-            const targets = this.wrappers[char]?.groupRef.children;
+            const targets = this.wrappers[char].groupRef?.children;
             targets.forEach(child => {
               child.to({
                 scaleX: 0.95,
