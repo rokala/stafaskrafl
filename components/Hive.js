@@ -161,20 +161,22 @@ export default class Hive extends React.Component {
   }
 
   shuffleAnimation = (e) => {
-    const optionalLetters = Object.keys(this.wrappers).slice(0, -1);
-    const requiredLetter = Object.keys(this.wrappers).slice(-1);
-    const durationUnit = 0.1;
-    const durationUnitS = 800 * durationUnit;
-    this.wrappers[requiredLetter].groupRef.to({
-      scaleX: 1.1,
-      scaleY: 1.1,
-      duration: 0.2,
+    const totalDuration = 0.7;
+    const inOutRatio = 0.25;
+    const [durationIn, durationOut] = [ inOutRatio * totalDuration, (1.0 - inOutRatio) * totalDuration ];
+    const optionalLetters = this.props.letters.optional;
+    const requiredGroup = this.wrappers[this.props.letters.required].groupRef;
+    const durationOutPerLetter = durationOut / optionalLetters.length;
+    requiredGroup.to({
+      scaleX: 1.15,
+      scaleY: 1.15,
+      duration: durationIn,
       onFinish: () => {
-
-          this.wrappers[requiredLetter].groupRef.to({
+          requiredGroup.to({
+            //sides: 6,
             scaleX: 1,
             scaleY: 1,
-            duration: 0.4
+            duration: durationOut
           });
       }
     });
@@ -183,9 +185,9 @@ export default class Hive extends React.Component {
       wrapper.groupRef.to({
           offsetX: 0,
           offsetY: 0,
-          scaleX: 0.2,
-          scaleY: 0.2,
-          duration: 2 * durationUnit,
+          scaleX: 0.1,
+          scaleY: 0.1,
+          duration: durationIn,
           onFinish: () => {
             setTimeout(() => {
               wrapper.groupRef.to({
@@ -193,15 +195,15 @@ export default class Hive extends React.Component {
                 scaleY: 1.0,
                 offsetX: this.positions[wrapper.position].x,
                 offsetY: this.positions[wrapper.position].y,
-                duration: durationUnit,
+                duration: durationOutPerLetter,
               });
-            }, wrapper.position * durationUnitS);
+            }, 1000.0 * durationOutPerLetter * wrapper.position);
           }
       });
     });
     setTimeout(() => {
       this.setState({ formLocked: false });
-    }, 700)
+    }, 1000.0 * totalDuration);
   }
 
   onCellHoverOn(target) {
@@ -274,7 +276,6 @@ export default class Hive extends React.Component {
       <Stage width={2*this.center.x} height={2*this.center.y}>
         <Layer>
           {letters.map((letter, idx) => {
-            //const isRequired = idx === letters.length - 1;
             const wrapper = this.wrappers[letter];
             const position = this.positions[wrapper.position]
             return (
