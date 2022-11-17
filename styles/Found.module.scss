@@ -54,6 +54,10 @@
       padding: 0 1em .3em .1em;
       margin: 0 0 .3em 2em;
       border-bottom: 1px solid #25283C;
+
+      &::marker {
+        color: #a69cac;
+      }
     }
   }
 
@@ -76,7 +80,7 @@
         padding: 1em 0 1em 1em;
         & > * {
           display: inline;
-          margin-right: 1em;
+          margin-right: 0.7em;
           letter-spacing: .5px;
         }
         & > *:last-child {
@@ -116,6 +120,10 @@
         margin: 0 0 0.3em 2em;
         border-bottom: 1px solid #25283C;
         max-width: 150px;
+
+        &::marker {
+          color: #a69cac;
+        }
       }
     }
   }
