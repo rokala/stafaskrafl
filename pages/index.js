@@ -1,5 +1,6 @@
 import React from 'react';
-import Head from 'next/head'
+import Head from 'next/head';
+import Image from 'next/image';
 import dynamic from "next/dynamic";
 import Found from '../components/Found';
 import styles from '../styles/Home.module.scss'
@@ -121,11 +122,12 @@ export default class Home extends React.Component {
         />
       <div className={styles.container}>
         <Head>
-          <title>Stafaskrafl</title>
-          <meta name="description" content="Finndu eins mörg orð sem innihalda ákveðna bókstafi." />
+          <title>Stafasett</title>
+          <meta name="description" content="Finndu eins mörg orð og þú getur með þessum 7 bókstöfum." />
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <nav className={styles.header}>
+        <Image src="/brand.png" alt="Stafasett logo" width={60} height={60}/>
         </nav>
         <main className={`${styles.main} ${this.state.foundIsExpanded ? 'expand' : ''}`}>
           <HiveDynamic
