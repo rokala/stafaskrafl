@@ -324,7 +324,7 @@ export default class Hive extends React.Component {
                   fontStyle={wrapper.isRequired ? 'bold' : 'normal'}
                   width={2*this.radius}
                   height={2*this.radius}
-                  offsetX={this.radius-1}
+                  offsetX={this.radius-2}
                   offsetY={this.radius-5}
                   rotation={0}
                 />
