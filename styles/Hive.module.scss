@@ -9,61 +9,71 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    user-select: none;
 
     & > button {
       cursor: pointer;
-    }
-
-    & > button:nth-child(2) {
-      font-size: 1em;
-      text-transform: uppercase;
-      padding: 0.5em 0.8em;
-      border-radius: 6px;
-      background-color: #13172c;
-      border: 1px solid #36384c;
-      color: #fff8f0;
-      letter-spacing: 1px;
-      &:hover {
-        color: #cfcfcf;
-	      background-color: #36384c;
-	      border-color: #606274;
-      }
-
-      &:disabled {
-        //cursor: not-allowed;
-        background-color: #272a3e;
-        border-color: #36384c;
-        color: #a69cac;
-      }
-    }
-
-    & > button:not(:nth-child(2)) {
-      padding: 0;
-      margin: 0;
-      background-color: transparent;
-      border:none;
+      user-select: none;
 
       & > img {
-        transition: filter .2s;
-        width: auto;
-	      height: 45px;
-        filter: invert(67%) sepia(7%) saturate(78%) hue-rotate(267deg) brightness(89%) contrast(91%);
+        pointer-events: none;
+      }
 
-        &:focus-visible {
-          outline:none!important;
-          border:none;
+      &:nth-child(2) {
+        font-size: 1em;
+        text-transform: uppercase;
+        padding: 0.5em 0.8em;
+        border-radius: 6px;
+        background-color: #13172c;
+        border: 1px solid #36384c;
+        color: #fff8f0;
+        letter-spacing: 1px;
+        &:hover {
+          color: #cfcfcf;
+          background-color: #36384c;
+          border-color: #606274;
+        }
+  
+        &:disabled {
+          background-color: #272a3e;
+          border-color: #36384c;
+          color: #a69cac;
         }
       }
 
-      &:disabled > img {
-        filter: invert(10%) sepia(5%) saturate(6023%) hue-rotate(195deg) brightness(98%) contrast(83%);
-        cursor: not-allowed;
-      }
+      &:not(:nth-child(2)) {
+        padding: 0;
+        margin: 0;
+        background-color: transparent;
+        border:none;
+  
+        & > img {
+          transition: filter .2s;
+          width: auto;
+          height: 45px;
+          filter: invert(67%) sepia(7%) saturate(78%) hue-rotate(267deg) brightness(89%) contrast(91%);
+  
+          &:focus-visible {
+            outline:none!important;
+            border:none;
+          }
+        }
 
-      &:not([disabled]) > img {
-        &:active {
-          filter: invert(20%) sepia(10%) saturate(882%) hue-rotate(200deg) brightness(94%) contrast(94%);
+        &:not([disabled]):hover > img {
+          filter: invert(95%) sepia(97%) saturate(14%) hue-rotate(213deg) brightness(104%) contrast(104%);
+        }
+  
+        &:disabled {
+          cursor: not-allowed;
+          & > img {
+            filter: invert(10%) sepia(5%) saturate(6023%) hue-rotate(195deg) brightness(98%) contrast(83%);
+            cursor: not-allowed;
+          }
+        }
+  
+        &:not([disabled]) > img {
+          &:active {
+            filter: invert(20%) sepia(10%) saturate(882%) hue-rotate(200deg) brightness(94%) contrast(94%);
+          }
         }
       }
     }

@@ -38,7 +38,7 @@ export default class Found extends React.Component {
       const usesAllLetters = numUniqueChars(word) === gameConfig.numLetterOptions
       return (
         <div key={word} className={usesAllLetters ? styles.pangram : ''}>
-          {word}
+          {`${word[0].toUpperCase()}${word.slice(1).toLowerCase()}`}
         </div>
       );
     });
