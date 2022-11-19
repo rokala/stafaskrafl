@@ -21,7 +21,7 @@
       left: -5px;
       width: 3px;
       height: 100%;
-      background: #a69cac;
+      background: var(--color-text-dim);
       animation: caret-blink 1s steps(2, start) infinite;
     }
 
@@ -39,10 +39,10 @@
 }
 
 .required {
-  color: #a69cac;
+  color: var(--color-text-dim);
 }
 
 .placeholder {
-  color: #a69cac;
+  color: var(--color-text-dim);
   user-select: none;
 }

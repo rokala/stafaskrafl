@@ -30,6 +30,11 @@ export default class Hive extends React.Component {
       { x: 0, y: 0 }
     ];
     this.wrappers = {};
+    this.theme = getComputedStyle(window.document.querySelector('body'));
+  }
+
+  getProp(variableName) {
+    return this.theme.getPropertyValue(`--${variableName}`).trim();
   }
 
   updateWrapper() {
@@ -109,6 +114,7 @@ export default class Hive extends React.Component {
         });
       }
     });
+
   }
 
   clickAndHold = (btnEl) => {
@@ -245,14 +251,14 @@ export default class Hive extends React.Component {
     const parent = target.getParent();
     const polygon = parent.children.find(child => child.className === 'RegularPolygon');
     polygon.to({
-      fill: polygon.name() === 'required' ? '#13172C' : '#25283C',
+      fill: this.getProp(`color-cell-bg-${polygon.name()}-hover`),
       duration: 0.1
     });
 
     const text = parent.children.find(child => child.className === 'Text');
     if (text.name() === 'required') {
       text.to({
-        fill: '#fff8f0',
+        fill: this.getProp(`color-cell-text-required-hover`),
         duration: 0.1
       });
     }
@@ -265,14 +271,14 @@ export default class Hive extends React.Component {
     const parent = target.getParent();
     const polygon = parent.children.find(child => child.className === 'RegularPolygon');
     polygon.to({
-      fill: polygon.name() === 'required' ? '#a69cac' : '#36384C',
+      fill: this.getProp(`color-cell-bg-${polygon.name()}`),
       duration: 0.1
     });
 
     const text = parent.children.find(child => child.className === 'Text');
     if (text.name() === 'required') {
       text.to({
-        fill: '#13172C',
+        fill: this.getProp(`color-cell-text-required`),
         duration: 0.1
       });
     }
@@ -317,7 +323,8 @@ export default class Hive extends React.Component {
         <Layer>
           {letters.map((letter, idx) => {
             const wrapper = this.wrappers[letter];
-            const position = this.positions[wrapper.position]
+            const position = this.positions[wrapper.position];
+            const typeName = wrapper.isRequired ? 'required' : 'optional';
             return (
               <Group
                 key={`grp-${letter}`}
@@ -340,13 +347,13 @@ export default class Hive extends React.Component {
                   ref={(node) => {
                     wrapper.polygonRef = node;
                   }}
-                  name={wrapper.isRequired ? 'required' : 'optional'}
+                  name={typeName}
                   x={0}
                   y={0}
                   sides={6}
                   radius={this.radius}
-                  fill={wrapper.isRequired ? '#a69cac' : '#36384C'}
-                  stroke={wrapper.isRequired ? '#36384C' : '#a1a1a1'}
+                  fill={this.getProp(`color-cell-bg-${typeName}`)}
+                  stroke={this.getProp(`color-cell-stroke-${typeName}`)}
                   strokeWidth={2}
                   rotation={30}
                 />
@@ -355,9 +362,9 @@ export default class Hive extends React.Component {
                     wrapper.textRef = node;
                     //node.cache({drawBorder: true});
                   }}
-                  name={wrapper.isRequired ? 'required' : 'optional'}
+                  name={typeName}
                   text={letter}
-                  fill={wrapper.isRequired ? '#13172C' : '#FFF8F0'}
+                  fill={this.getProp(`color-cell-text-${typeName}`)}
                   fontSize={40}
                   align={'center'}
                   verticalAlign={'middle'}

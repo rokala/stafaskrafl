@@ -1,6 +1,51 @@
 @import './settings.scss';
-@import './colors.css';
 
+body.dark {
+  --color-text-primary: #fff8f0;
+  --color-text-secondary: #ed9633;
+
+  --color-bg-primary: #13172c;
+  
+  --color-cell-bg-optional: #36384c;
+  --color-cell-bg-required: #a69cac;
+  --color-cell-bg-optional-hover: #25283C;
+  --color-cell-bg-required-hover: var(--color-bg-primary);
+  --color-cell-text-optional: var(--color-text-primary);
+  --color-cell-text-required: var(--color-bg-primary);
+  --color-cell-text-required-hover: var(--color-text-primary);
+  --color-cell-stroke-optional: #a1a1a1;
+  --color-cell-stroke-required: var(--color-cell-bg-optional);
+  
+  --color-bg-header: var(--color-cell-bg-optional);
+  --color-bg-footer: var(--color-cell-bg-optional-hover);
+  --color-text-dim: var(--color-cell-bg-required);
+
+  --color-button-default: var(--color-cell-bg-required);
+  --color-button-border: var(--color-cell-bg-optional);
+
+  /*--color-border-*/
+  /*--color-cell-text-optional-hover: black;*/
+  
+}
+
+body.light {
+  --color-text-primary: #13172c;
+  --color-text-secondary: #fbf536;
+  --color-bg-primary: #f2eecb;
+  --color-cell-bg-optional: pink;
+  --color-cell-bg-required: green;
+  --color-cell-bg-optional-hover: purple;
+  --color-cell-bg-required-hover: var(--color-bg-primary);
+  --color-cell-text-optional: var(--color-text-primary);
+  --color-cell-text-required: var(--color-bg-primary);
+  --color-cell-stroke-optional: #a1a1a1;
+  --color-cell-stroke-required: var(--color-cell-bg-optional);
+}
+
+/*
+:root {
+  --color-text: var(--color-)
+}*/
 html {
   height: 100%;
   font-size: $font-size-base;
@@ -11,8 +56,9 @@ html {
     margin: 0;
   }
   & > body {
-    background: var(--color-bg-dark);
-    color: var(--color-text-dark);
+    transition: color .3s ease-in-out, background-color .3s ease-in-out;
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
     min-height: 100%;
   }
 }
@@ -56,14 +102,7 @@ a {
 
 
 @media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-
-    body {
-      color: var(--color-text-dark);
-      background: var(--color-bg-dark);
-    }
-  }
+ 
 }
 
 /*

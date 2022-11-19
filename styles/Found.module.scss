@@ -128,9 +128,9 @@
   }
 }
 
-.pangram {
+.bonus {
   font-weight: bold;
-  color: #ed9633;
+  color: var(--color-text-secondary);
 }
 
 @media only screen and (max-width: 768px/*map-get($breakpoints, xs)*/)  {

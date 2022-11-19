@@ -1,7 +1,10 @@
+import React, { useEffect } from 'react';
 import '../styles/globals.scss'
 
-// TODO: Add _document to properly style root element
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    document.body.className = pageProps.isDarkTheme ? 'dark' : 'light';
+  });
   return <Component {...pageProps}/>
 }
 

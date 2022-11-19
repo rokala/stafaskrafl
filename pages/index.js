@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import dynamic from "next/dynamic";
+import Link from 'next/link';
 import Found from '../components/Found';
 import styles from '../styles/Home.module.scss'
 import DAL from '../core/data.access.layer';
@@ -28,8 +29,6 @@ export default class Home extends React.Component {
 
   constructor(props) {
     super(props);
-    this.onChangeSort.bind(this);
-    this.onToggleExpand.bind(this);
     this.timeoutId = null;
     this.gameId = props.id;
   }
@@ -76,6 +75,12 @@ export default class Home extends React.Component {
 
   onChangeSort = (e) => {
     this.setState({ sortAlphabetically: !this.state.sortAlphabetically });
+  }
+
+  onThemeToggle = (e) => {
+    const newVal = !e.target.checked;
+    //console.log(`isDarkTheme curr: ${this.state.isDarkTheme}\t isDarkTheme new:${newVal}`);
+    //this.setState({ isDarkTheme: newVal });
   }
 
   onSubmitGuess = (word) => {
@@ -127,8 +132,19 @@ export default class Home extends React.Component {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <nav className={styles.header}>
-        <Image src="/brand.png" alt="Stafasett logo" width={60} height={60}/>
-          <input className={styles.toggleTheme} type="checkbox" />
+          <Image
+            src="/brand.png"
+            alt="Stafasett logo"
+            width={60}
+            height={60}
+            priority={true}
+          />
+          <input
+            className={styles.toggleTheme}
+            type="checkbox"
+            defaultChecked={this.props.isDarkTheme}
+            onClick={(e) => this.onThemeToggle(e)}
+          />
         </nav>
         <main className={`${styles.main} ${this.state.foundIsExpanded ? 'expand' : ''}`}>
           <HiveDynamic
@@ -158,7 +174,8 @@ export async function getStaticProps (context) {
       id: gameState.date,
       hashes: gameState.hashes,
       letters: gameState.letters,
-      input: ''
+      input: '',
+      isDarkTheme: true
     }
   };
 }

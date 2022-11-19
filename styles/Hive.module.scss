@@ -24,9 +24,9 @@
         text-transform: uppercase;
         padding: 0.5em 0.8em;
         border-radius: 6px;
-        background-color: #13172c;
-        border: 1px solid #36384c;
-        color: #fff8f0;
+        background-color: transparent;
+        border: 1px solid var(--color-button-border);
+        color: var(--color-text-primary);
         letter-spacing: 1px;
         &:hover {
           color: #cfcfcf;
