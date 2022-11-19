@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Stage, Layer, Text, RegularPolygon, Group } from 'react-konva';
+import { Konva } from 'konva';
 import Input from './Input';
 import styles from '../styles/Hive.module.scss'
 import { gameConfig } from '../core/gameConfig';
@@ -110,6 +111,38 @@ export default class Hive extends React.Component {
     });
   }
 
+  clickAndHold = (btnEl) => {
+    let timerId;
+    const DURATION = 200;
+
+    //handle when clicking down
+    const onMouseDown = () => {
+      timerId = setInterval(() => {
+        btnEl && btnEl.click();
+      }, DURATION);
+    };
+
+    //stop or clear interval
+    const clearTimer = () => {
+      timerId && clearInterval(timerId);
+    };
+
+    //handle when mouse is clicked
+    btnEl.addEventListener("mousedown", onMouseDown);
+    //handle when mouse is raised
+    btnEl.addEventListener("mouseup", clearTimer);
+    //handle mouse leaving the clicked button
+    btnEl.addEventListener("mouseout", clearTimer);
+
+    // a callback function to remove listeners useful in libs like react
+    // when component or element is unmounted
+    return () => {
+      btnEl.removeEventListener("mousedown", onMouseDown);
+      btnEl.removeEventListener("mouseup", clearTimer);
+      btnEl.removeEventListener("mouseout", clearTimer);
+    };
+  };
+
   onAddLetter(letter) {
     if(letter.length > 1) {
       return;
@@ -188,6 +221,7 @@ export default class Hive extends React.Component {
           scaleX: 0.1,
           scaleY: 0.1,
           duration: durationIn,
+          easing: Konva.Easings.EaseIn,
           onFinish: () => {
             setTimeout(() => {
               wrapper.groupRef.to({
@@ -196,6 +230,7 @@ export default class Hive extends React.Component {
                 offsetX: this.positions[wrapper.position].x,
                 offsetY: this.positions[wrapper.position].y,
                 duration: durationOutPerLetter,
+                easing: Konva.Easings.EaseOut,
               });
             }, 1000.0 * durationOutPerLetter * wrapper.position);
           }
@@ -339,8 +374,8 @@ export default class Hive extends React.Component {
         </Layer>
       </Stage>
       <div className={styles.action}>
-        <button type="button" onClick={() => this.onRemoveLastInput()} disabled={this.state.input.length === 0 || this.state.formLocked}> 
-          <Image src="/icons/delete-left-solid.svg" alt="Delete last character" width={40} height={0.68*40} color={'white'} />
+        <button type="button" onMouseDown={() => this.onRemoveLastInput()} disabled={this.state.input.length === 0 || this.state.formLocked}> 
+          <Image src="/icons/delete-left-solid.svg" alt="Delete last character" width={40} height={0.68*40} color={'white'} onContextMenu={() => false}/>
         </button>
         <button type="button" onClick={() => this.onShuffle()} disabled={this.state.formLocked}>
           Stokka
