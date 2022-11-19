@@ -1,12 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
 import { Stage, Layer, Text, RegularPolygon, Group } from 'react-konva';
-import { Konva } from 'konva';
 import Input from './Input';
 import styles from '../styles/Hive.module.scss'
 import { gameConfig } from '../core/gameConfig';
 import shuffle from '../utils/shuffle';
 import hasProp from '../utils/hasProp';
+import Konva from 'konva';
 
 export default class Hive extends React.Component {
   state = {
