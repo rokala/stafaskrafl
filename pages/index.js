@@ -128,6 +128,7 @@ export default class Home extends React.Component {
         </Head>
         <nav className={styles.header}>
         <Image src="/brand.png" alt="Stafasett logo" width={60} height={60}/>
+          <input className={styles.toggleTheme} type="checkbox" />
         </nav>
         <main className={`${styles.main} ${this.state.foundIsExpanded ? 'expand' : ''}`}>
           <HiveDynamic
