@@ -4,7 +4,6 @@ const { digestNode } = require('../utils/digest');
 const { numUniqueChars } = require('../utils/numUniqueChars');
 const sqlite3 = require('better-sqlite3');
 const config = require('../core/gameConfig').gameConfig;
-
 class DatabaseInitializer {
   constructor(dbPath) {
 
@@ -20,7 +19,8 @@ class DatabaseInitializer {
     this.instance.exec(`
       CREATE TABLE IF NOT EXISTS words (
         'value' TEXT UNIQUE NOT NULL PRIMARY KEY,
-        'hash' TEXT UNIQUE NOT NULL
+        'hash' TEXT UNIQUE NOT NULL,
+        'is_key' INTEGER NOT NULL
       );
       CREATE TABLE IF NOT EXISTS game_states (
         'date' INTEGER UNIQUE NOT NULL PRIMARY KEY,
@@ -52,11 +52,15 @@ class DatabaseInitializer {
           return true;
         })
     ).values())
-    .map(el => {
-      return { value: el, hash: digestNode(el) }
+    .map(word => {
+      return {
+        value: word,
+        hash: digestNode(word),
+        isKey: (numUniqueChars(word) === config.numLetterOptions && word.length === config.numLetterOptions) ? 1 : 0
+      }
     });
     
-    const insert = this.instance.prepare('INSERT INTO words (value, hash) VALUES (@value, @hash)');
+    const insert = this.instance.prepare('INSERT INTO words (value, hash, is_key) VALUES (@value, @hash, @isKey)');
     const insertMany = this.instance.transaction((records) => {
       for (const record of records) {
         insert.run(record);

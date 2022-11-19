@@ -1,6 +1,8 @@
 import Database from 'better-sqlite3';
 import { today } from '../utils/dates';
 import NodeCache from 'node-cache';
+import { numUniqueChars } from '../utils/numUniqueChars';
+import shuffle from '../utils/shuffle';
 
 class DataAccessLayer {
   constructor() {
@@ -31,6 +33,18 @@ class DataAccessLayer {
     const response = { ...activeState, hashes: answers.map(el => el.hash)/*, words: answers.map(el => el.value) */};
     this.cache.set(dateToday, response);
     return response;
+  }
+
+  createRandomState() {
+    const keyWord = this.instance
+      .prepare(`SELECT value FROM words WHERE is_key=1 ORDER BY RANDOM() LIMIT 1;`)
+      .pluck()
+      .get();
+    const letters = shuffle(keyWord.split(''));
+    return {
+      optional: letters.slice(0, -1).sort(),
+      required: (letters.slice(-1))[0]
+    };
   }
 
   getGameState(date) {
@@ -80,7 +94,7 @@ class DataAccessLayer {
       .all();
   }
 
-  getStateAnswersCount(state) {
+  getAnswerCount(state) {
     const allLetters = state.optional.concat(state.required).join('');
     return this.instance
       .prepare(

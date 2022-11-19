@@ -1,6 +1,5 @@
 import DAL from '../../core/data.access.layer';
 import { today, future } from '../../utils/dates';
-import GameComposer from '../../core/GameComposer';
 
 export default function handler(req, res) {
   if (req.query.secret !== process.env.AUTH_KEY) {
@@ -12,13 +11,13 @@ export default function handler(req, res) {
 
   let currDate =  DAL.getNextAvailableStateDate() ?? todayDate;
   const datesAdded = [];
-
+  const minSolutions = parseInt(process.env.GAME_MIN_SOLUTIONS);
   while (currDate <= futureDate) {
-    const state = GameComposer.generateRandomState();
+    const state = DAL.createRandomState(); 
     if (DAL.stateExists(state)) {
       continue;
     }
-    if (DAL.getStateAnswersCount(state) < parseInt(process.env.GAME_MIN_SOLUTIONS)) {
+    if (DAL.getAnswerCount(state) < minSolutions) {
       continue;
     }
     datesAdded.push(currDate.toDateString());

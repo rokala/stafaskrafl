@@ -266,7 +266,7 @@ export default class Hive extends React.Component {
       });
     });
   }
-  
+
   render() {
     this.updateWrapper();
     const letters = Object.keys(this.wrappers);
