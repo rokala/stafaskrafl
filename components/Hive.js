@@ -270,10 +270,15 @@ export default class Hive extends React.Component {
   render() {
     this.updateWrapper();
     const letters = Object.keys(this.wrappers);
+    const [width, height] = [2 * this.center.x, 2 * this.center.y];
     return (
       <div className={`${styles.wrapper} hive`}>
-      <Input letters={this.state.input} required={this.props.letters.required}/>
-      <Stage width={2*this.center.x} height={2*this.center.y}>
+      <Input
+        letters={this.state.input}
+        required={this.props.letters.required}
+        containerWidth={width}
+      />
+      <Stage width={width} height={height}>
         <Layer>
           {letters.map((letter, idx) => {
             const wrapper = this.wrappers[letter];
