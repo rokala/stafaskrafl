@@ -27,7 +27,7 @@
   justify-content: flex-end;
 	align-items: center;
 	gap: 2em;
-	margin: 0 auto;
+	margin: 2.5em auto;
   width: 100%;
   max-width: max(40%, 750px);
 }
@@ -38,15 +38,12 @@
 
 @media only screen and (max-width: 768px/*map-get($breakpoints, xs)*/)  {
   .header {
-    //flex: 0 0 4em;
   }
   .main {
     flex: 1 0;
     flex-direction: column-reverse;
     gap: 1em;
-    margin-top: 2.5em;
   }
   .footer {
-    //flex: 0 0 8em;
   }
 } 
