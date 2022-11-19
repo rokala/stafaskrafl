@@ -145,6 +145,7 @@
 
     & > .compact {
       display: flex;
+      max-height: calc(100vh - 9em);
     }
   } 
 } 
