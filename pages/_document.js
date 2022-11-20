@@ -6,7 +6,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="is-IS">
         <Head />
-        <body className={pageProps.isDarkTheme ? 'dark' : 'light'}>
+        <body className={!pageProps.isDark ? 'dark' : 'light'}>
           <Main />
           <NextScript />
         </body>

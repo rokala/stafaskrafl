@@ -1,11 +1,30 @@
 import React, { useEffect } from 'react';
-import '../styles/globals.scss'
+import Layout from '../components/layout';
+import '../styles/globals.scss';
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
-    document.body.className = pageProps.isDarkTheme ? 'dark' : 'light';
+    //console.log(pageProps);
+    //document.body.className = pageProps.isDarkTheme ? 'dark' : 'light';
   });
-  return <Component {...pageProps}/>
+  const themeChanged = (e) => {
+    setIsDark(!e.target.checked);
+    document.body.className = (e.target.checked ? 'light' : 'dark')
+  };
+  const [isDark, setIsDark] = React.useState(true);
+  return (
+    <Layout onThemeToggle={themeChanged}>
+      <Component {...pageProps} /*currTheme={isDark ? 'dark' : 'light'}*/ />
+    </Layout>
+  )
 }
-
-export default MyApp
+/*
+export async function getStaticProps (context) {
+  return {
+    props: {
+      isDarkTheme: true
+    }
+  };
+}
+*/
+export default MyApp;

@@ -1,10 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
+//import Image from 'next/image';
 import dynamic from "next/dynamic";
-import Link from 'next/link';
+//import Link from 'next/link';
 import Found from '../components/Found';
-import styles from '../styles/Home.module.scss'
+import styles from '../styles/Home.module.scss';
 import DAL from '../core/data.access.layer';
 import { gameConfig } from '../core/gameConfig';
 import { digestBrowser } from '../utils/digest';
@@ -13,7 +13,6 @@ import { compareIcelandic, compareNone } from '../utils/alphabetSort';
 import tryParseJSONObject from '../utils/tryParseJsonObject';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 
 const HiveDynamic = dynamic(() => import('../components/Hive'), {
   ssr: false,
@@ -77,12 +76,6 @@ export default class Home extends React.Component {
     this.setState({ sortAlphabetically: !this.state.sortAlphabetically });
   }
 
-  onThemeToggle = (e) => {
-    const newVal = !e.target.checked;
-    //console.log(`isDarkTheme curr: ${this.state.isDarkTheme}\t isDarkTheme new:${newVal}`);
-    //this.setState({ isDarkTheme: newVal });
-  }
-
   onSubmitGuess = (word) => {
     if(word.length === 0) {
       return false;
@@ -117,52 +110,32 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <>
-      <ToastContainer
+      <div className={`${styles.game} ${this.state.foundIsExpanded ? 'expand' : ''}`}>
+        <ToastContainer
           position="top-center"
           hideProgressBar
           autoClose={1500}
           closeOnClick={false}
           theme="dark"
         />
-      <div className={styles.container}>
         <Head>
           <title>Stafasett</title>
           <meta name="description" content="Finndu eins mörg orð og þú getur með þessum 7 bókstöfum." />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <nav className={styles.header}>
-          <Image
-            src="/brand.png"
-            alt="Stafasett logo"
-            width={60}
-            height={60}
-            priority={true}
-          />
-          <input
-            className={styles.toggleTheme}
-            type="checkbox"
-            defaultChecked={this.props.isDarkTheme}
-            onClick={(e) => this.onThemeToggle(e)}
-          />
-        </nav>
-        <main className={`${styles.main} ${this.state.foundIsExpanded ? 'expand' : ''}`}>
-          <HiveDynamic
-            letters={this.props.letters}
-            submitGuess={this.onSubmitGuess}
-          />
-          <Found
-            words={[...this.state.found].sort(this.state.sortAlphabetically ? compareIcelandic : compareNone)}
-            alphabeticSort={this.state.sortAlphabetically}
-            handleSort={this.onChangeSort}
-            numSolutions={this.props.hashes.length}
-            handleExpand={this.onToggleExpand}
-          />
-        </main>
-        <footer className={styles.footer}>
-        </footer>
+        <HiveDynamic
+          //currTheme={!!this.props.currTheme}
+          letters={this.props.letters}
+          submitGuess={this.onSubmitGuess}
+        />
+        <Found
+          words={[...this.state.found].sort(this.state.sortAlphabetically ? compareIcelandic : compareNone)}
+          alphabeticSort={this.state.sortAlphabetically}
+          handleSort={this.onChangeSort}
+          numSolutions={this.props.hashes.length}
+          handleExpand={this.onToggleExpand}
+        />
       </div>
-      </>
     )
   }
 }
@@ -175,7 +148,7 @@ export async function getStaticProps (context) {
       hashes: gameState.hashes,
       letters: gameState.letters,
       input: '',
-      isDarkTheme: true
+      //isDark: true
     }
   };
 }

@@ -114,7 +114,6 @@ export default class Hive extends React.Component {
         });
       }
     });
-
   }
 
   clickAndHold = (btnEl) => {
