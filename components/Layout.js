@@ -1,10 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { getStaticProps } from '../pages';
-//import { useState } from 'react';
 import styles from '../styles/Layout.module.scss' ;
 
-export default function Layout({ onThemeToggle, children }) {
+export default function Layout({ darkThemeOn, onThemeToggle, children }) {
   return (
     <div className={styles.container}>
       <nav className={styles.header}>
@@ -18,7 +16,7 @@ export default function Layout({ onThemeToggle, children }) {
         <input
           className={styles.toggleTheme}
           type="checkbox"
-          defaultChecked={false}
+          defaultChecked={!darkThemeOn}
           onClick={(e) => onThemeToggle(e)}
         />
       </nav>
@@ -31,12 +29,3 @@ export default function Layout({ onThemeToggle, children }) {
     </div>
   )
 }
-/*
-export async function getStaticProps (context) {
-  return {
-    props: {
-      isDarkTheme: true
-    }
-  };
-}
-*/

@@ -147,8 +147,7 @@ export async function getStaticProps (context) {
       id: gameState.date,
       hashes: gameState.hashes,
       letters: gameState.letters,
-      input: '',
-      //isDark: true
+      input: ''
     }
   };
 }

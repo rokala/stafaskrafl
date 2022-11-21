@@ -1,51 +1,66 @@
 @import './settings.scss';
 
+:root {
+  --color-floral-white: #fff8f0;
+  --color-heliotrope-gray: #a69cac;
+  --color-carrot-orange: #ed9633;
+  --color-oxford-blue: #13172c;
+  --color-independence: #36384c;
+  --color-rich-black: #0d0d0e;
+  --color-space-cadet: #25283C;
+  --color-quick-silver: #a1a1a1;
+  --color-max-yellow: #fbf536;
+  --color-light-goldenrod: #f2eecb;
+  --color-bone: #cecec0;
+  --color-nickel: #777764;
+  --color-ash-gray: #b1b1a1;
+}
+
 body.dark {
-  --color-text-primary: #fff8f0;
-  --color-text-secondary: #ed9633;
+  --color-text-primary: var(--color-floral-white);
+  --color-text-highlight: var(--color-carrot-orange);
 
-  --color-bg-primary: #13172c;
+  --color-bg-primary: var(--color-oxford-blue);
   
-  --color-cell-bg-optional: #36384c;
-  --color-cell-bg-required: #a69cac;
-  --color-cell-bg-optional-hover: #25283C;
-  --color-cell-bg-required-hover: var(--color-bg-primary);
-  --color-cell-text-optional: var(--color-text-primary);
-  --color-cell-text-required: var(--color-bg-primary);
-  --color-cell-text-required-hover: var(--color-text-primary);
-  --color-cell-stroke-optional: #a1a1a1;
-  --color-cell-stroke-required: var(--color-cell-bg-optional);
+  --color-cell-bg-optional: var(--color-independence);
+  --color-cell-bg-required: var(--color-heliotrope-gray);
+  --color-cell-bg-optional-hover: var(--color-space-cadet);
+  --color-cell-bg-required-hover: var(--color-oxford-blue);
+  --color-cell-text-optional: var(--color-floral-white);
+  --color-cell-text-required: var(--color-oxford-blue);
+  --color-cell-text-required-hover: var(--color-floral-white);
+  --color-cell-stroke-optional: var(--color-quick-silver);
+  --color-cell-stroke-required: var(--color-independence);
   
-  --color-bg-header: var(--color-cell-bg-optional);
-  --color-bg-footer: var(--color-cell-bg-optional-hover);
-  --color-text-dim: var(--color-cell-bg-required);
+  --color-bg-header: var(--color-heliotrope-gray);
+  --color-bg-footer: var(--color-space-cadet);
+  --color-text-dim: var(--color-heliotrope-gray);
 
-  --color-button-default: var(--color-cell-bg-required);
-  --color-button-border: var(--color-cell-bg-optional);
-
-  /*--color-border-*/
-  /*--color-cell-text-optional-hover: black;*/
-  
+  --color-button-theme: var(--color-oxford-blue);
+  --color-button-border: var(--color-quick-silver);
 }
 
 body.light {
-  --color-text-primary: #13172c;
-  --color-text-secondary: #fbf536;
-  --color-bg-primary: #f2eecb;
-  --color-cell-bg-optional: pink;
-  --color-cell-bg-required: green;
-  --color-cell-bg-optional-hover: purple;
-  --color-cell-bg-required-hover: var(--color-bg-primary);
-  --color-cell-text-optional: var(--color-text-primary);
-  --color-cell-text-required: var(--color-bg-primary);
-  --color-cell-stroke-optional: #a1a1a1;
-  --color-cell-stroke-required: var(--color-cell-bg-optional);
+  --color-text-primary: var(--color-oxford-blue);
+  --color-text-highlight: var(--color-max-yellow);
+  --color-bg-primary: var(--color-light-goldenrod);
+  --color-cell-bg-optional: var(--color-bone);
+  --color-cell-bg-required: var(--color-nickel);
+  --color-cell-bg-optional-hover: var(--color-ash-gray);
+  --color-cell-bg-required-hover: var(--color-light-goldenrod);
+  --color-cell-text-optional: var(--color-oxford-blue);
+  --color-cell-text-required: var(--color-light-goldenrod);
+  --color-cell-stroke-optional: var(--color-quick-silver);
+  --color-cell-stroke-required: var(--color-bone);
+
+  --color-bg-header: var(--color-nickel);
+  --color-bg-footer: var(--color-ash-gray);
+  --color-text-dim: var(--color-nickel);
+
+  --color-button-theme: var(--color-light-goldenrod);
+  --color-button-border: var(--color-quick-silver);
 }
 
-/*
-:root {
-  --color-text: var(--color-)
-}*/
 html {
   height: 100%;
   font-size: $font-size-base;
