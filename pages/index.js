@@ -124,7 +124,6 @@ export default class Home extends React.Component {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <HiveDynamic
-          //currTheme={!!this.props.currTheme}
           letters={this.props.letters}
           submitGuess={this.onSubmitGuess}
         />

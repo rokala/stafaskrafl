@@ -10,18 +10,33 @@
   background-color: var(--color-bg-header);
   padding: .5em 0;
   height: 2.4em;
-  & > img {
+  & > .brand {
     display: block;
     position: relative;
     margin: 0 auto;
     border-radius: 10%;
     user-select: none;
+    width: 60px;
+    height: 60px;
+
+    & > * {
+      transition: fill .2s ease-in-out;
+    }
+
+    & > .top {
+      fill: var(--color-bg-primary);
+    }
+
+    & > .bot {
+      fill: var(--color-bg-header);
+    }
   }
 
   .toggleTheme {
     position: relative;
     display: block;
-    left: 85%;
+    float: right;
+	  margin-right: 2em;
     bottom: 4.9em;
     
     --size: 1.5rem;
@@ -59,9 +74,19 @@
   }
 }
 
+.main {
+  max-width: 100%;
+}
+
 .footer {
   background-color: var(--color-bg-footer);
   padding: 0.5em 0;
 	height: 2.4em;
 	text-align: center;
 }
+
+@media only screen and (max-width: 768px/*map-get($breakpoints, xs)*/)  {
+  .main {
+    flex-grow: 1;
+  } 
+} 

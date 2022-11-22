@@ -19,10 +19,10 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     const darkStatus = localStorage.getItem('prefers_dark') === 'true' || false;
     setTheme(darkStatus);
-    setIsLoaded(true);
+    //setIsLoaded(true);
   }, []);
-  const [isLoaded, setIsLoaded] = React.useState(false);
-  const [isDark, setIsDark] = React.useState(null);
+  const [isLoaded, setIsLoaded] = React.useState(true);
+  const [isDark, setIsDark] = React.useState(true);
   return (
     isLoaded ?
       (<Layout darkThemeOn={isDark} onThemeToggle={themeChanged}>

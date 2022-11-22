@@ -10,6 +10,7 @@
   --color-space-cadet: #25283C;
   --color-quick-silver: #a1a1a1;
   --color-max-yellow: #fbf536;
+  --color-safety-orange: #ff6c16;
   --color-light-goldenrod: #f2eecb;
   --color-bone: #cecec0;
   --color-nickel: #777764;
@@ -37,12 +38,30 @@ body.dark {
   --color-text-dim: var(--color-heliotrope-gray);
 
   --color-button-theme: var(--color-oxford-blue);
-  --color-button-border: var(--color-quick-silver);
+
+  --color-button-bg: transparent;
+  --color-button-color: var(--color-floral-white);
+  --color-button-border: var(--color-independence);
+
+  --color-button-bg-hover: var(--color-independence);
+  --color-button-color-hover: var(--color-floral-white);
+  --color-button-border-hover: var(--color-independence);
+
+  --color-button-bg-disabled: var(--color-independence);
+  --color-button-color-disabled: var(--color-quick-silver);
+  --color-button-border-disabled: var(--color-independence);
+
+  --color-list-marker: var(--color-nickel);
+
+  --color-action-button: invert(67%) sepia(7%) saturate(78%) hue-rotate(267deg) brightness(89%) contrast(91%);
+  --color-action-button-disabled: invert(10%) sepia(5%) saturate(6023%) hue-rotate(195deg) brightness(98%) contrast(83%);
+  --color-action-button-hover: invert(95%) sepia(97%) saturate(14%) hue-rotate(213deg) brightness(104%) contrast(104%);
+  --color-action-button-active: invert(20%) sepia(10%) saturate(882%) hue-rotate(200deg) brightness(94%) contrast(94%);
 }
 
 body.light {
   --color-text-primary: var(--color-oxford-blue);
-  --color-text-highlight: var(--color-max-yellow);
+  --color-text-highlight: var(--color-safety-orange);
   --color-bg-primary: var(--color-light-goldenrod);
   --color-cell-bg-optional: var(--color-bone);
   --color-cell-bg-required: var(--color-nickel);
@@ -58,7 +77,25 @@ body.light {
   --color-text-dim: var(--color-nickel);
 
   --color-button-theme: var(--color-light-goldenrod);
-  --color-button-border: var(--color-quick-silver);
+
+  --color-button-bg: transparent;
+  --color-button-color: var(--color-oxford-blue);
+  --color-button-border: var(--color-bone);
+
+  --color-button-bg-hover: var(--color-bone);
+  --color-button-color-hover: var(--color-oxford-blue);
+  --color-button-border-hover: var(--color-bone);
+
+  --color-button-bg-disabled: var(--color-bone);
+  --color-button-color-disabled: var(--color-quick-silver);
+  --color-button-border-disabled: var(--color-bone);
+
+  --color-list-marker: var(--color-nickel);
+  
+  --color-action-button: invert(48%) sepia(10%) saturate(529%) hue-rotate(22deg) brightness(92%) contrast(90%);
+  --color-action-button-disabled: invert(97%) sepia(5%) saturate(464%) hue-rotate(17deg) brightness(86%) contrast(88%);
+  --color-action-button-hover: invert(6%) sepia(40%) saturate(1848%) hue-rotate(206deg) brightness(98%) contrast(94%);
+  --color-action-button-active: invert(20%) sepia(10%) saturate(882%) hue-rotate(200deg) brightness(94%) contrast(94%);
 }
 
 html {
@@ -71,7 +108,7 @@ html {
     margin: 0;
   }
   & > body {
-    transition: color .3s ease-in-out, background-color .3s ease-in-out;
+    transition: color .2s ease-in-out, background-color .2s ease-in-out;
     background: var(--color-bg-primary);
     color: var(--color-text-primary);
     min-height: 100%;

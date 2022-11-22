@@ -23,21 +23,22 @@
         font-size: 1em;
         text-transform: uppercase;
         padding: 0.5em 0.8em;
-        border-radius: 6px;
-        background-color: transparent;
+        border-radius: .3em;
+        background-color: var(--color-button-bg);
         border: 1px solid var(--color-button-border);
-        color: var(--color-text-primary);
+        color: var(--color-button-color);
         letter-spacing: 1px;
+        line-height: 0.9;
         &:hover {
-          color: #cfcfcf;
-          background-color: #36384c;
-          border-color: #606274;
+          background-color: var(--color-button-bg-hover);
+          color: var(--color-button-color-hover);
+          border-color: var(--color-button-border-hover);
         }
   
         &:disabled {
-          background-color: #272a3e;
-          border-color: #36384c;
-          color: #a69cac;
+          background-color: var(--color-button-bg-disabled);
+          color: var(--color-heliotrope-gray);
+          border-color: var(--color-button-border-disabled);
         }
       }
 
@@ -51,7 +52,7 @@
           transition: filter .2s;
           width: auto;
           height: 45px;
-          filter: invert(67%) sepia(7%) saturate(78%) hue-rotate(267deg) brightness(89%) contrast(91%);
+          filter: var(--color-action-button);
   
           &:focus-visible {
             outline:none!important;
@@ -60,31 +61,25 @@
         }
 
         &:not([disabled]):hover > img {
-          filter: invert(95%) sepia(97%) saturate(14%) hue-rotate(213deg) brightness(104%) contrast(104%);
+          filter: var(--color-action-button-hover);
         }
   
         &:disabled {
           cursor: not-allowed;
           & > img {
-            filter: invert(10%) sepia(5%) saturate(6023%) hue-rotate(195deg) brightness(98%) contrast(83%);
+            filter: var(--color-action-button-disabled);
             cursor: not-allowed;
           }
         }
   
         &:not([disabled]) > img {
           &:active {
-            filter: invert(20%) sepia(10%) saturate(882%) hue-rotate(200deg) brightness(94%) contrast(94%);
+            filter: var(--color-action-button-active);
           }
         }
       }
     }
   }
-}
-
-.delete {
-  fill: green!important;
-  stroke-width: 3!important;
-  stroke: #491EC4!important;
 }
 
 @media only screen and (max-width: 768px/*map-get($breakpoints, xs)*/)  {
